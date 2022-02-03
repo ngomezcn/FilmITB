@@ -7,11 +7,8 @@ class AppState {
 
     fun inputInt() : Int
     {
-        val value = 0;
         print("Input: ")
-        println()
-
-        return value;
+        return scan.nextLine().toInt();
     }
 }
 
