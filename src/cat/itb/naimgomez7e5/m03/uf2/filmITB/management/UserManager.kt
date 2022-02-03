@@ -1,7 +1,7 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.management
 
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.User
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.AppState
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.*
 
 class UserManager {
     companion object {
@@ -9,7 +9,7 @@ class UserManager {
          * Creates a new user, all the fields of the User(...) constructor will be passed
          */
         fun addUser(name: String, lastName: String, age: Int) {
-            AppState.usersDB.add(
+            FilmItb.usersDB.add(
                 User(name, lastName, age)
             )
             println("Usuari creat amb èxit!")
@@ -41,8 +41,8 @@ class UserManager {
          */
         fun deleteUser(user: User = AppState.currentUser){
 
-            AppState.usersDB.removeAt(
-                AppState.usersDB.indexOf(user)
+            FilmItb.usersDB.removeAt(
+                FilmItb.usersDB.indexOf(user)
             );
 
             if(AppState.currentUser == user)
@@ -51,8 +51,8 @@ class UserManager {
             }
             else
             {
-                AppState.usersDB.removeAt(
-                    AppState.usersDB.indexOf(user)
+                FilmItb.usersDB.removeAt(
+                    FilmItb.usersDB.indexOf(user)
                 );
             }
 
@@ -64,7 +64,7 @@ class UserManager {
          */
         fun getUserByName(indicatedName : String) : User?
         {
-            for (user in AppState.usersDB)
+            for (user in FilmItb.usersDB)
             {
                 if(user.name.lowercase() == indicatedName.lowercase())
                 {

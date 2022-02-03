@@ -1,16 +1,14 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.User
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.*
 
 class AppState {
 
+    val filmItb = FilmItb();
+
     companion object {
-        val usersDB = mutableListOf<User>(
-            User("Juan", "Lopez", 45),  // Predefined test data
-            User("Rosa", "Melano", 70), // Predefined test data
-        );
         lateinit var currentUser : User;
     }
-
 }
 

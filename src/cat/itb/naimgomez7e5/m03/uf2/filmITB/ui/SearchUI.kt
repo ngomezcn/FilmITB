@@ -1,7 +1,6 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
-
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.AppManager
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.*
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.*
 
 
 class SearchUI {
@@ -16,7 +15,7 @@ class SearchUI {
         println("7: Recomended")
         println("0: Return to main menu")
 
-        when (AppManager().inputInt()) {
+        when (AppManager.inputInt()) {
             1 -> searchByTitle()
             2 -> searchByDirector()
             3 -> searchByMainActor()
