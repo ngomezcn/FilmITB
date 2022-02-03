@@ -19,4 +19,10 @@ class SearchUI {
             1 ->
         }
     }
+
+    private fun searchByTitle()
+    {
+
+    }
+
 }

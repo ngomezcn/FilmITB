@@ -10,7 +10,8 @@ class AppState {
         print("$msg ")
         return scan.nextLine().toInt();
     }
-     fun inputString(msg: String = "Input:") : String
+
+    fun inputString(msg: String = "Input:") : String
     {
         print("$msg ");
         return scan.nextLine();

@@ -26,10 +26,10 @@ class UserUI {
         }
 
     }
-    // si necesitas pillar valores utiliza las funciones de AppState tipo AppState().inputInt() o AppState().inputString(), asi evitamos fumadas raras del scanNextLine, Next,  Int ....
+
     fun addUser() {
         val user = User(1, "name", "last", 1)
         print("Nom de l'usuari: ")
-        user. AppState().inputString()
+        AppState().inputString()
     }
 }
