@@ -5,10 +5,15 @@ import java.util.*
 class AppState {
     val scan = Scanner(System.`in`)
 
-    fun inputInt() : Int
+    fun inputInt(msg: String = "Input:") : Int
     {
-        print("Input: ")
+        print("$msg ")
         return scan.nextLine().toInt();
+    }
+     fun inputString(msg: String = "Input:") : String
+    {
+        print("$msg ");
+        return scan.nextLine();
     }
 }
 

@@ -1,9 +1,10 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.User
+
 class UserUI {
 
-    fun showMenu()
-    {
+    fun showMenu() {
         println("Users:")
         println("1: Add user")
         println("2: Show my user")
@@ -25,9 +26,10 @@ class UserUI {
         }
 
     }
-
-    fun addUser()
-    {
-        // Mete las opciones que creas
+    // si necesitas pillar valores utiliza las funciones de AppState tipo AppState().inputInt() o AppState().inputString(), asi evitamos fumadas raras del scanNextLine, Next,  Int ....
+    fun addUser() {
+        val user = User(1, "name", "last", 1)
+        print("Nom de l'usuari: ")
+        user. AppState().inputString()
     }
 }
