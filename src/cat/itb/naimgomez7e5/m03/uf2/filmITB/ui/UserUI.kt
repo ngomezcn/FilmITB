@@ -7,6 +7,7 @@ import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.*
 class UserUI {
 
     fun showMenu() {
+
         println("Users:")
         println("1: Add user")
         println("2: Show my user")
