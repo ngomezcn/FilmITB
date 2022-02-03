@@ -3,6 +3,7 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.User
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.*
 import java.util.*
+import kotlin.system.exitProcess
 
 /**
  *  Coding conventions
@@ -17,13 +18,13 @@ class UI {
 
     fun start()
     {
-        //LoginUI().showMenu()
+        LoginUI().showMenu()
         showMainMenu();
     }
 
     fun showMainMenu()
     {
-       // println("Welcome " + (AppState.currentUser?.name ?: 0) + " to FilmItb:")
+        println("Welcome ${AppState.currentUser} to FilmsITB")
         println("1: User")
         println("2: Films")
         println("3: Search")
@@ -39,12 +40,14 @@ class UI {
             }
         }
     }
+    
+    fun exit(status : Int = 0)
+    {
+        exitProcess(status);
+    }
 }
 
 fun main()
 {
-    //AppState.myUsers.add(User("aaa", "asd", 13));
-    AppState.myUsers[0];
-    val ui = UI();
-    ui.start()
+    UI().start()
 }
