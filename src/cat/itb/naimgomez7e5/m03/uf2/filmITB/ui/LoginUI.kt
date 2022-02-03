@@ -9,11 +9,7 @@ class LoginUI {
         {
             println("Indica el nom del usuari que vols utilitzar:")
 
-            val name = AppState().inputString("Nom: ");
-            // para canviar era asi no
-            // sep lo ka pasao es que una cosa un momt
-            // bruh me tengo que ir, hago un git push y lo revisamos mañana ahora acabo el login hay un problema que podr default currentuser es null y eso es peligroso
-            AppState.currentUser = AppState.myUsers[0]
+            val name = AppState().inputString("Nom: ")
             val validate = getUserIfExists(name);
             if(validate != null)
             {
