@@ -32,6 +32,11 @@ class UI {
             }
         }
     }
+
+    fun showMainMenu()
+    {
+
+    }
 }
 
 fun main()
