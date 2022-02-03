@@ -17,13 +17,13 @@ class UI {
 
     fun start()
     {
-
+        //LoginUI().showMenu()
         showMainMenu();
     }
 
     fun showMainMenu()
     {
-        println("Welcome to FilmItb:")
+       // println("Welcome " + (AppState.currentUser?.name ?: 0) + " to FilmItb:")
         println("1: User")
         println("2: Films")
         println("3: Search")
@@ -43,8 +43,7 @@ class UI {
 
 fun main()
 {
-    AppState.myUsers.add(User("aaa", "asd", 13));
-
+    //AppState.myUsers.add(User("aaa", "asd", 13));
     AppState.myUsers[0];
     val ui = UI();
     ui.start()

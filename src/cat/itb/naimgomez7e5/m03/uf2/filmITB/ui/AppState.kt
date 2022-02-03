@@ -7,8 +7,11 @@ class AppState {
     private val scan = Scanner(System.`in`)
 
     companion object {
-        val myUsers = mutableListOf<User>();
-        val currentUser : User = User("aa", "aaa", 13);
+        val myUsers = mutableListOf<User>(
+            User("Juan", "Lopez", 45),
+            User("Rosa", "Melano", 70),
+        );
+        var currentUser = User;
     }
 
     fun inputInt(msg: String = "Input:") : Int
