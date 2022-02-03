@@ -1,6 +1,8 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
 class UserUI {
+
+
     fun showMenu()
     {
         println("Users:")
@@ -13,15 +15,7 @@ class UserUI {
         println("7: Show statistics")
         println("0: Return to main menu")
 
-        when (AppState().inputInt()) {
-            1 -> userUI.showMenu();
-            2 -> filmUI.showMenu();
-            3 -> searchUI.showMenu();
-            0 -> return;
-            else -> {
-                return;
-            }
-        }
+
         AppState().inputInt();
     }
 }
