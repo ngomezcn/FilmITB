@@ -27,25 +27,43 @@ class UserUI {
         }
 
     }
-    fun addUser() {
-        AppState().myUsers.add(
-            User(
-                AppState().inputString("Nom de l'usuari: "),
-                AppState().inputString("Cognom de l'usuari: "),
-                AppState().inputInt("Edat de l'usuari: ")
-            )
+    private fun addUser() {// i entonces donde creo el usuario
+        User.addUser(
+            AppState().inputString("Nom de l'usuari:"),
+            AppState().inputString("Cognom de l'usuari:"),
+            AppState().inputInt("Edat de l'usuari:")
         )
-        println("Usuari creat amb èxit!")
     }
     private fun showUser() {
-        TODO()
-    pero si tiene contrasenya o algo asi suma puntio
-
+        println(AppState.currentUser)
     }
     private fun viewUsers(){
-        println(User)
+        println(AppState.myUsers)
     }
     private fun updateUser() {
+        val user = AppState.myUsers[AppState().inputInt("Quin usuari vols modificar(Numero del 0 al ${AppState.myUsers.size}): ")].name
+        println("1: Change name")
+        println("2: Change last name")
+        println("3: Change age")
+        println("0: Back to menu")
+
+        when (AppState().inputInt()) {
+            1 -> changeName(user)
+            2 -> changeLast(user)
+            3 -> changeAge(user)
+            0 -> showMenu()
+            else -> {
+                showMenu()
+            }
+        }
+    }
+    private fun changeAge(user: String) {
+        TODO("Not yet implemented")
+    }
+    private fun changeLast(user: String) {
+        TODO("Not yet implemented")
+    }
+    private fun changeName(user: String) {
         TODO("Not yet implemented")
     }
 }

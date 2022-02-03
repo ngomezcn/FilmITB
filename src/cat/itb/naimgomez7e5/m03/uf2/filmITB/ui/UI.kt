@@ -1,5 +1,6 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.User
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.*
 import java.util.*
 
@@ -15,6 +16,12 @@ class UI {
     private val searchUI = SearchUI();
 
     fun start()
+    {
+
+        showMainMenu();
+    }
+
+    fun showMainMenu()
     {
         println("Welcome to FilmItb:")
         println("1: User")
@@ -32,15 +39,13 @@ class UI {
             }
         }
     }
-
-    fun showMainMenu()
-    {
-
-    }
 }
 
 fun main()
 {
+    AppState.myUsers.add(User("aaa", "asd", 13));
+
+    AppState.myUsers[0];
     val ui = UI();
     ui.start()
 }
