@@ -17,8 +17,9 @@ class UserUI {
 
         when (AppState().inputInt()) {
             1 -> addUser()
-            // TODO: Pon aqui las funciones que vayas creando
-
+            2 -> showUser()
+            3 -> viewUsers()
+            4 -> updateUser()
             0 -> UI().showMainMenu();
             else -> {
                 UI().showMainMenu();
@@ -26,10 +27,25 @@ class UserUI {
         }
 
     }
-
     fun addUser() {
-        val user = User(1, "name", "last", 1)
-        print("Nom de l'usuari: ")
-        AppState().inputString()
+        AppState().myUsers.add(
+            User(
+                AppState().inputString("Nom de l'usuari: "),
+                AppState().inputString("Cognom de l'usuari: "),
+                AppState().inputInt("Edat de l'usuari: ")
+            )
+        )
+        println("Usuari creat amb èxit!")
+    }
+    private fun showUser() {
+        TODO()
+    pero si tiene contrasenya o algo asi suma puntio
+
+    }
+    private fun viewUsers(){
+        println(User)
+    }
+    private fun updateUser() {
+        TODO("Not yet implemented")
     }
 }
