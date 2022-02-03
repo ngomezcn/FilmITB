@@ -1,6 +1,8 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.User
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.UserManager
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.*
 
 class UserUI {
 
@@ -15,7 +17,7 @@ class UserUI {
         println("7: Show statistics")
         println("0: Return to main menu")
 
-        when (AppState().inputInt()) {
+        when (AppManager().inputInt()) {
             1 -> addUser()
             2 -> showUser()
             3 -> viewUsers()
@@ -31,10 +33,10 @@ class UserUI {
 
     }
     private fun addUser() {
-        User.addUser(
-            AppState().inputString("Nom de l'usuari:"),
-            AppState().inputString("Cognom de l'usuari:"),
-            AppState().inputInt("Edat de l'usuari:")
+        UserManager.addUser(
+            AppManager().inputString("Nom de l'usuari:"),
+            AppManager().inputString("Cognom de l'usuari:"),
+            AppManager().inputInt("Edat de l'usuari:")
         )
         showMenu()
     }
@@ -53,19 +55,19 @@ class UserUI {
         for(i in AppState.usersDB.indices){
             println(AppState.usersDB[i].name)
         }
-        var user = AppState().inputInt("Quin usuari vols modificar(Numero del 0 al ${AppState.usersDB.size-1}):")
+        var user = AppManager().inputInt("Quin usuari vols modificar(Numero del 0 al ${AppState.usersDB.size-1}):")
         while(user > AppState.usersDB.size-1){
-            user = AppState().inputInt("Quin usuari vols modificar(Numero del 0 al ${AppState.usersDB.size-1}):")
+            user = AppManager().inputInt("Quin usuari vols modificar(Numero del 0 al ${AppState.usersDB.size-1}):")
         }
         println("1: Change name")
         println("2: Change last name")
         println("3: Change age")
         println("0: Back to menu")
 
-        when (AppState().inputInt()) {
-            1 -> User.changeName(AppState().inputString("Nou nom:"))
-            2 -> User.changeLastName(AppState().inputString("Nou cognom:"))
-            3 -> User.changeAge(AppState().inputInt("Nova edat:"))
+        when (AppManager().inputInt()) {
+            1 -> UserManager.changeName(AppManager().inputString("Nou nom:"))
+            2 -> UserManager.changeLastName(AppManager().inputString("Nou cognom:"))
+            3 -> UserManager.changeAge(AppManager().inputInt("Nova edat:"))
             0 -> showMenu()
             else -> {
                 showMenu()
@@ -79,23 +81,23 @@ class UserUI {
             println("$i: ${AppState.usersDB[i].name}")
         }
 
-        var targetName = AppState().inputString("Quin usuari vols eliminar?")
-        var user = User.getUserByName(targetName);
+        var targetName = AppManager().inputString("Quin usuari vols eliminar?")
+        var user = UserManager.getUserByName(targetName);
 
         while (user == null)
         {
-            targetName = AppState().inputString("Usuari inexistent! Torna a indicar l'usuari:")
-            user = User.getUserByName(targetName);
+            targetName = AppManager().inputString("Usuari inexistent! Torna a indicar l'usuari:")
+            user = UserManager.getUserByName(targetName);
         }
 
-        User.deleteUser(user)
+        UserManager.deleteUser(user)
 
         UserUI().showMenu();
     }
     private fun changeUser(){
-        var user = AppState().inputInt("Selecciona l'usuari que iniciar sesio(Numero del 0 al ${AppState.usersDB.size-1}):")
+        var user = AppManager().inputInt("Selecciona l'usuari que iniciar sesio(Numero del 0 al ${AppState.usersDB.size-1}):")
         while(user > AppState.usersDB.size-1){
-            user = AppState().inputInt("Selecciona l'usuari que iniciar sesio(Numero del 0 al ${AppState.usersDB.size-1}):")
+            user = AppManager().inputInt("Selecciona l'usuari que iniciar sesio(Numero del 0 al ${AppState.usersDB.size-1}):")
         }
         AppState.currentUser = AppState.usersDB[0]
     }

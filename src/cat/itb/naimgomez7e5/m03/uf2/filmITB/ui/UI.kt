@@ -1,7 +1,7 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.User
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.*
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.*
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -30,7 +30,7 @@ class UI {
         println("3: Search")
         println("0: Exit")
 
-        when (AppState().inputInt()) {
+        when (AppManager().inputInt()) {
             1 -> userUI.showMenu();
             2 -> filmUI.showMenu();
             3 -> searchUI.showMenu();
@@ -40,7 +40,7 @@ class UI {
             }
         }
     }
-    
+
     fun exit(status : Int = 0)
     {
         exitProcess(status);
@@ -49,5 +49,6 @@ class UI {
 
 fun main()
 {
+    AppState.usersDB
     UI().start()
 }

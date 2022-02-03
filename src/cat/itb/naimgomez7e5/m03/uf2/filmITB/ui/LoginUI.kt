@@ -1,4 +1,6 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.AppManager
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.UserManager
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.User
 
 class LoginUI {
@@ -8,13 +10,13 @@ class LoginUI {
         println("Welcome to FilmItb login")
         println("Indica el nom de l'usuari que vols utilitzar.")
 
-        var name = AppState().inputString("Username:");
-        var user = User.getUserByName(name);
+        var name = AppManager().inputString("Username:");
+        var user = UserManager.getUserByName(name);
 
         while (user == null)
         {
-            name = AppState().inputString("Nom:");
-            user = User.getUserByName(name);
+            name = AppManager().inputString("Nom:");
+            user = UserManager.getUserByName(name);
 
             println("Aquest usuari no existeix!")
             println("Torna a indicar el nom de l'usuari que vols utilitzar.")
