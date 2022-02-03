@@ -1,9 +1,6 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.AppState
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.FilmUI
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.SearchUI
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.UserUI
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.*
 import java.util.*
 
 /**
@@ -11,12 +8,11 @@ import java.util.*
  *  https://kotlinlang.org/docs/coding-conventions
  */
 
-
 class UI {
 
-    val userUI = UserUI();
-    val filmUI = FilmUI();
-    val searchUI = SearchUI();
+    private val userUI = UserUI();
+    private val filmUI = FilmUI();
+    private val searchUI = SearchUI();
 
     fun start()
     {
