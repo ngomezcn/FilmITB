@@ -74,6 +74,20 @@ class UserManager {
             return null;
         }
 
+        fun displayUsers()
+        {
+            for(i in FilmItb.usersDB.indices){
+                val user = FilmItb.usersDB[i];
+
+                if(user == AppState.currentUser)
+                {
+                    println("$i: ${user.name} ${user.lastName} (Current logged)")
+                } else
+                {
+                    println("$i: ${user.name} ${user.lastName}")
+                }
+            }
+        }
     }
 }
 // xmllint --shell hol.xml

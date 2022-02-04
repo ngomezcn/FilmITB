@@ -6,6 +6,7 @@ class LoginUI {
 
     fun showMenu()
     {
+        //UI().clearConsole();
         println("Welcome to AppManager login")
         println("Indica el nom de l'usuari que vols utilitzar.")
 
@@ -14,13 +15,11 @@ class LoginUI {
 
         while (user == null)
         {
-            name = AppManager.inputString("Nom:");
-            user = UserManager.getUserByName(name);
-
             println("Aquest usuari no existeix!")
             println("Torna a indicar el nom de l'usuari que vols utilitzar.")
+            name = AppManager.inputString("Username:");
+            user = UserManager.getUserByName(name);
         }
-
         AppState.currentUser = user;
     }
 }

@@ -2,6 +2,7 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
 
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.*
+import java.util.*
 import kotlin.system.exitProcess
 
 /**
@@ -23,6 +24,7 @@ class UI {
 
     fun showMainMenu()
     {
+        clearConsole();
         println("Welcome ${AppState.currentUser.name} to FilmsITB")
         println("1: User")
         println("2: Films")
@@ -44,9 +46,14 @@ class UI {
     {
         exitProcess(status);
     }
+
+    fun clearConsole() {
+        println("\n\n\n\n\n\n\n\n\n\n\n\r")
+    }
 }
 
 fun main()
 {
+    AppManager.inputInt()
     UI().start()
 }

@@ -8,19 +8,41 @@ class AppManager {
         private val scan = Scanner(System.`in`)
 
         /**
-         * Interface for string input
+         * Safe interface for string input
          * */
         fun inputInt(msg: String = "Input:"): Int {
             print("$msg ")
-            return scan.nextLine().toInt();
+            var rawInput = scan.nextLine().replace(" ", "")
+            rawInput.lowercase() in 48.toChar()..57.toChar()
+
+            while (rawInput == "" )
+            {
+                print("$msg ");
+                rawInput = scan.nextLine().replace(" ", "")
+            }
+            return rawInput.toInt()
         }
 
         /**
-         * Interface for character string input
+         * Safe interface for character string input
          * */
         fun inputString(msg: String = "Input:"): String {
             print("$msg ");
-            return scan.nextLine();
+            var input = scan.nextLine();
+            while (input == null)
+            {
+                print("$msg ");
+                input = scan.nextLine();
+            }
+            return input;
+        }
+
+        /**
+         * Interface to manage exit menu
+         * */
+        fun awaitEnter(msg: String = "Presione enter para continuar:") {
+            print("$msg ");
+            scan.nextLine();
         }
     }
 }

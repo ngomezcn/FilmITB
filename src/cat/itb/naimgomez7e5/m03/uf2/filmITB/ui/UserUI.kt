@@ -6,6 +6,7 @@ import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
 class UserUI {
 
     fun showMenu() {
+        UI().clearConsole();
         println("Users:")
         println("1: Add user")
         println("2: Show my user")
@@ -17,42 +18,45 @@ class UserUI {
         println("0: Return to main menu")
 
         when (AppManager.inputInt()) {
-            1 -> addUser()
-            2 -> showUser()
-            3 -> viewUsers()
-            4 -> updateUser()
-            5 -> deleteUser()
-            6 -> changeUser()
-            7 -> showStats()
-            0 -> UI().showMainMenu();
+            1 -> {UI().clearConsole(); addUser(); showMenu();}
+            2 -> {UI().clearConsole(); showUser(); showMenu();}
+            3 -> {UI().clearConsole(); viewUsers(); showMenu();}
+            4 -> {UI().clearConsole(); updateUser(); showMenu();}
+            5 -> {UI().clearConsole(); deleteUser(); showMenu();}
+            6 -> {UI().clearConsole(); changeUser(); showMenu();}
+            7 -> {UI().clearConsole(); showStats(); showMenu();}
+            0 -> UI().showMainMenu()
             else -> {
                 UI().showMainMenu();
             }
         }
     }
     private fun addUser() {
+        println("[Add User]")
         UserManager.addUser(
             AppManager.inputString("Nom de l'usuari:"),
             AppManager.inputString("Cognom de l'usuari:"),
             AppManager.inputInt("Edat de l'usuari:")
         )
-        showMenu()
+        AppManager.awaitEnter()
     }
 
     private fun showUser() {
+        println("[Show User]")
         println(AppState.currentUser)
-        showMenu()
+        AppManager.awaitEnter();
     }
 
     private fun viewUsers(){
-        println(FilmItb.usersDB)
-        showMenu()
+        println("[View Users]")
+        UserManager.displayUsers();
+        AppManager.awaitEnter();
     }
 
     private fun updateUser() {
-        for(user in FilmItb.usersDB){
-            println("${user.name} ${user.lastName}")
-        }
+        println("[Update Users]")
+        UserManager.displayUsers();
+
         var user = AppManager.inputInt("Quin usuari vols modificar(Numero del 0 al ${FilmItb.usersDB.size-1}):")
 
         while(user > FilmItb.usersDB.size-1){
@@ -72,12 +76,11 @@ class UserUI {
                 showMenu()
             }
         }
-        showMenu()
+        AppManager.awaitEnter();
     }
     private fun deleteUser(){
-        for(user in FilmItb.usersDB){
-            println("${user.name} ${user.lastName}")
-        }
+        println("[Delete User]")
+        UserManager.displayUsers();
 
         var targetName = AppManager.inputString("Quin usuari vols eliminar?")
         var user = UserManager.getUserByName(targetName);
@@ -88,14 +91,15 @@ class UserUI {
             user = UserManager.getUserByName(targetName);
         }
 
+        AppManager.awaitEnter();
         UserManager.deleteUser(user)
-
         UserUI().showMenu();
     }
     private fun changeUser(){
-        for(user in FilmItb.usersDB){
-            println("${user.name} ${user.lastName}")
-        }
+        println("Change User")
+        UserManager.displayUsers();
+
+
         var user = AppManager.inputInt("Selecciona l'usuari que iniciar sesio(Numero del 0 al ${FilmItb.usersDB.size-1}):")
         while(user > FilmItb.usersDB.size-1){
             user = AppManager.inputInt("Selecciona l'usuari que iniciar sesio(Numero del 0 al ${FilmItb.usersDB.size-1}):")
