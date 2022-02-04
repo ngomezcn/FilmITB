@@ -50,8 +50,8 @@ class UserUI {
     }
 
     private fun updateUser() {
-        for(i in FilmItb.usersDB.indices){
-            println(FilmItb.usersDB[i].name)
+        for(user in FilmItb.usersDB){
+            println("${user.name} ${user.lastName}")
         }
         var user = AppManager.inputInt("Quin usuari vols modificar(Numero del 0 al ${FilmItb.usersDB.size-1}):")
         while(user > FilmItb.usersDB.size-1){
@@ -93,11 +93,15 @@ class UserUI {
         UserUI().showMenu();
     }
     private fun changeUser(){
+        for(user in FilmItb.usersDB){
+            println("${user.name} ${user.lastName}")
+        }
         var user = AppManager.inputInt("Selecciona l'usuari que iniciar sesio(Numero del 0 al ${FilmItb.usersDB.size-1}):")
         while(user > FilmItb.usersDB.size-1){
             user = AppManager.inputInt("Selecciona l'usuari que iniciar sesio(Numero del 0 al ${FilmItb.usersDB.size-1}):")
         }
-        AppState.currentUser = FilmItb.usersDB[0]
+        AppState.currentUser = FilmItb.usersDB[user]
+        showMenu()
     }
     private fun showStats(){
         TODO()
