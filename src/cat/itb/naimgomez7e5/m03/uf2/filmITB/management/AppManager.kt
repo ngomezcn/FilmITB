@@ -8,7 +8,7 @@ class AppManager {
         private val scan = Scanner(System.`in`)
 
         /**
-         * Interface for integer input
+         * Interface for string input
          * */
         fun inputInt(msg: String = "Input:"): Int {
             print("$msg ")

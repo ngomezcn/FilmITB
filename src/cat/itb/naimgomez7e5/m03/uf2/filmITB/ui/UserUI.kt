@@ -54,6 +54,7 @@ class UserUI {
             println("${user.name} ${user.lastName}")
         }
         var user = AppManager.inputInt("Quin usuari vols modificar(Numero del 0 al ${FilmItb.usersDB.size-1}):")
+
         while(user > FilmItb.usersDB.size-1){
             user = AppManager.inputInt("Quin usuari vols modificar(Numero del 0 al ${FilmItb.usersDB.size-1}):")
         }
@@ -74,9 +75,8 @@ class UserUI {
         showMenu()
     }
     private fun deleteUser(){
-
-        for(i in FilmItb.usersDB.indices){
-            println("$i: ${FilmItb.usersDB[i].name}")
+        for(user in FilmItb.usersDB){
+            println("${user.name} ${user.lastName}")
         }
 
         var targetName = AppManager.inputString("Quin usuari vols eliminar?")
