@@ -59,6 +59,5 @@ class UI {
 
 fun main()
 {
-
     UI().start()
 }
