@@ -57,9 +57,6 @@ class UI {
     }
 }
 
-class Person(val name: String, val lastName: String) {
-    constructor(values: List<String>) : this(values[0], values[1])
-}
 fun main()
 {
 
