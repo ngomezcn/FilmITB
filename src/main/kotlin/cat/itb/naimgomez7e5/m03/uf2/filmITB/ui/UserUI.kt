@@ -94,14 +94,10 @@ class UserUI {
      */
     private fun updateUser() {
         println("[Update Users]")
-        displayUsers();
 
-        var userIndex = AppManager.inputInt("Which user would you like to modify (Number from 0 to ${FilmItb.usersDB.size-1}):")
+        val user = selectUserFromMenu("Which user do you want to modify?",);
 
-        while(userIndex > FilmItb.usersDB.size-1){
-            userIndex = AppManager.inputInt("Which user would you like to modify (Number from 0 to ${FilmItb.usersDB.size-1}):")
-        }
-        println("[Selected: ${FilmItb.usersDB[userIndex].name} ${FilmItb.usersDB[userIndex].lastName}]")
+        println("[Selected: ${user.name} ${user.lastName}]")
         println("1: Change name")
         println("2: Change last name")
         println("3: Change age")
@@ -110,16 +106,13 @@ class UserUI {
         when (AppManager.inputInt()) {
             1 -> {
                     UserManager.changeName(
-                                AppManager.inputString("New name:"),
-                                FilmItb.usersDB[userIndex])};
+                                AppManager.inputString("New name:"), user)};
             2 -> {
                     UserManager.changeLastName(
-                                AppManager.inputString("New last name:"),
-                                FilmItb.usersDB[userIndex])};
+                                AppManager.inputString("New last name:"), user)};
             3 -> {
                     UserManager.changeAge(
-                                AppManager.inputInt("New age:"),
-                                FilmItb.usersDB[userIndex])};
+                                AppManager.inputInt("New age:"), user)};
             0 -> showMenu()
             else -> {
                 showMenu()
@@ -128,32 +121,46 @@ class UserUI {
         AppManager.awaitEnter();
     }
 
+    private fun selectUserFromMenu(msg : String, allowCurrentUser : Boolean = true, errorMsg : String = msg) : User
+    {
+        displayUsers();
+
+        var maxRange = FilmItb.usersDB.size-1;
+        var selectedUser = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+
+        while (selectedUser < 0 || selectedUser > FilmItb.usersDB.size-1 || (AppState.currentUser == FilmItb.usersDB[selectedUser] && !allowCurrentUser))
+        {
+            if(AppState.currentUser == FilmItb.usersDB[selectedUser] && !allowCurrentUser)
+            {
+                println("\n$errorMsg")
+                selectedUser = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+            } else
+            {"$msg (Number from 0 to $maxRange):"
+                selectedUser = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+            }
+        }
+
+        return FilmItb.usersDB[0];
+    }
+
     /**
      * Delete the indicated user
      * */
     private fun deleteUser(){
         println("[Delete User]")
-        displayUsers();
 
-        var userIndex = AppManager.inputInt("Which user do you want to delete? (Number from 0 to ${FilmItb.usersDB.size-1}):")
-        while(userIndex > FilmItb.usersDB.size-1){
-            userIndex = AppManager.inputInt("Which user do you want to delete? (Number from 0 to ${FilmItb.usersDB.size-1}):")
-        }
+        val user = selectUserFromMenu("Which user do you want to delete?", false,"You can't delete the user that is currently logged in!");
+        UserManager.deleteUser(user)
 
-        AppManager.awaitEnter();
-        UserManager.deleteUser(FilmItb.usersDB[userIndex])
         println("Successfully removed!")
+        AppManager.awaitEnter();
         UserUI().showMenu();
     }
     private fun changeUser(){
         println("Change User")
-        displayUsers();
 
-        var user = AppManager.inputInt("Select the user to login (Number from 0 to ${FilmItb.usersDB.size-1}):")
-        while(user > FilmItb.usersDB.size-1){
-            user = AppManager.inputInt("Select the user to login (Number from 0 to ${FilmItb.usersDB.size-1}):")
-        }
-        AppState.currentUser = FilmItb.usersDB[user]
+        val user = selectUserFromMenu("Select the user to login", false, "You are already logged with this user")
+        AppState.currentUser = user
 
         println("Done!")
         println("Current user: ${AppState.currentUser.name}")

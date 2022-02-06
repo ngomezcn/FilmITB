@@ -40,28 +40,17 @@ class UserManager {
         /**
          * Deletes the indicated user from the database
          */
-        fun deleteUser(user: User = AppState.currentUser){
+        fun deleteUser(user: User){
 
             FilmItb.usersDB.removeAt(
                 FilmItb.usersDB.indexOf(user)
             );
 
-            if(AppState.currentUser == user)
-            {
-                println("Actualment, estàs utilitzant aquest usuari, no el pots eliminar.")
-            }
-            else
-            {
-                FilmItb.usersDB.removeAt(
-                    FilmItb.usersDB.indexOf(user)
-                );
-            }
-
             println("Usuari eliminat amb èxit.")
         }
 
         /**
-         * Return a User(...) obtained by iterating the DB.
+         * Find user by name.
          */
         fun getUserByName(indicatedName : String) : User?
         {
