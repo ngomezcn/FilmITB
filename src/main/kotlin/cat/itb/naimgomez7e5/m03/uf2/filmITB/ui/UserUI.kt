@@ -24,13 +24,13 @@ class UserUI {
         println("0: Return to main menu")
 
         when (AppManager.inputInt()) {
-            1 -> {UI().clearConsole(); addUser();    showMenu();}
-            2 -> {UI().clearConsole(); showUser();   showMenu();}
-            3 -> {UI().clearConsole(); viewUsers();  showMenu();}
-            4 -> {UI().clearConsole(); updateUser(); showMenu();}
-            5 -> {UI().clearConsole(); deleteUser(); showMenu();}
-            6 -> {UI().clearConsole(); changeUser(); showMenu();}
-            7 -> {UI().clearConsole(); showStats();  showMenu();}
+            1 -> {UI().clearConsole(); addUser();    AppManager.awaitEnter(); showMenu();}
+            2 -> {UI().clearConsole(); showUser();   AppManager.awaitEnter(); showMenu();}
+            3 -> {UI().clearConsole(); viewUsers();  AppManager.awaitEnter(); showMenu();}
+            4 -> {UI().clearConsole(); updateUser(); AppManager.awaitEnter(); showMenu();}
+            5 -> {UI().clearConsole(); deleteUser(); AppManager.awaitEnter(); showMenu();}
+            6 -> {UI().clearConsole(); changeUser(); AppManager.awaitEnter(); showMenu();}
+            7 -> {UI().clearConsole(); showStats();  AppManager.awaitEnter(); showMenu();}
             0 -> UI().showMainMenu()
             else -> {
                 UI().showMainMenu()
@@ -43,12 +43,13 @@ class UserUI {
      */
     private fun addUser() {
         println("[Add User]")
-        UserManager.addUser(
-            AppManager.inputString("User name:"),
-            AppManager.inputString("User's last name:"),
-            AppManager.inputInt("User's age:")
+        val newUser = User(
+            name = AppManager.inputString("User name:"),
+            lastName = AppManager.inputString("User's last name:"),
+            age = AppManager.inputInt("User's age:")
         )
-        AppManager.awaitEnter()
+        UserManager.addUser(newUser);
+        println("Usuari creat amb èxit!")
     }
 
     /**
@@ -86,7 +87,6 @@ class UserUI {
     private fun viewUsers(){
         println("[View Users]")
         displayUsers();
-        AppManager.awaitEnter();
     }
 
     /**
@@ -118,29 +118,42 @@ class UserUI {
                 showMenu()
             }
         }
-        AppManager.awaitEnter();
     }
 
     private fun selectUserFromMenu(msg : String, allowCurrentUser : Boolean = true, errorMsg : String = msg) : User
     {
         displayUsers();
 
-        var maxRange = FilmItb.usersDB.size-1;
-        var selectedUser = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+        val maxRange = FilmItb.usersDB.size-1;
 
-        while (selectedUser < 0 || selectedUser > FilmItb.usersDB.size-1 || (AppState.currentUser == FilmItb.usersDB[selectedUser] && !allowCurrentUser))
-        {
-            if(AppState.currentUser == FilmItb.usersDB[selectedUser] && !allowCurrentUser)
-            {
-                println("\n$errorMsg")
-                selectedUser = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
-            } else
-            {"$msg (Number from 0 to $maxRange):"
+        while(true) {
+            var selectedUser = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+            while (!AppManager.isInValidRange(0, maxRange, selectedUser)) {
                 selectedUser = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
             }
+            if (!AppManager.isCurrentUser(FilmItb.usersDB[selectedUser]) && !allowCurrentUser) {
+                return FilmItb.usersDB[selectedUser];
+            }
+            println("\n$errorMsg")
         }
 
-        return FilmItb.usersDB[0];
+        /*displayUsers();
+        var maxRange = FilmItb.usersDB.size-1;
+        var selectedUser : Int;
+        while(true){
+            selectedUser = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+            if(AppManager.isInValidRange(0, maxRange, selectedUser))
+            {
+                if(AppManager.isCurrentUser(FilmItb.usersDB[selectedUser]) && !allowCurrentUser)
+                {
+                    println("\n$errorMsg")
+                }
+                else
+                {
+                    return FilmItb.usersDB[selectedUser];
+                }
+            }
+        }*/
     }
 
     /**
@@ -151,20 +164,15 @@ class UserUI {
 
         val user = selectUserFromMenu("Which user do you want to delete?", false,"You can't delete the user that is currently logged in!");
         UserManager.deleteUser(user)
-
         println("Successfully removed!")
-        AppManager.awaitEnter();
-        UserUI().showMenu();
     }
     private fun changeUser(){
-        println("Change User")
+        println("[Change User]")
 
         val user = selectUserFromMenu("Select the user to login", false, "You are already logged with this user")
         AppState.currentUser = user
 
-        println("Done!")
-        println("Current user: ${AppState.currentUser.name}")
-        AppManager.awaitEnter();
+        println("Done!\n Current user: ${AppState.currentUser.name}")
     }
     private fun showStats(){
         println("TODO: showStats()")

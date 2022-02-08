@@ -3,11 +3,14 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.AppManager
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.FilmManager
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.UserManager
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.Film
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.FilmItb
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.User
 
 class FilmUI {
     fun showMenu()
     {
+        UI().clearConsole();
         println("Films:")
         println("1: Add film")
         println("2: Show films")
@@ -20,14 +23,14 @@ class FilmUI {
         println("0: Return to main menu")
 
         when (AppManager.inputInt()) {
-            1 -> {UI().clearConsole(); addFilm(); showMenu();}
-            2 -> {UI().clearConsole(); showFilm(); showMenu();}
-            3 -> {UI().clearConsole(); deleteFilms(); showMenu();}
-            4 -> {UI().clearConsole(); watchFilms(); showMenu();}
-            5 -> {UI().clearConsole(); viewWatchedFilms(); showMenu();}
-            6 -> {UI().clearConsole(); addFavorites(); showMenu();}
-            7 -> {UI().clearConsole(); showFavorites(); showMenu();}
-            8 -> {UI().clearConsole(); showLikesFilm(); showMenu();}
+            1 -> {UI().clearConsole(); addFilm(); AppManager.awaitEnter(); showMenu();}
+            2 -> {UI().clearConsole(); showFilms(); AppManager.awaitEnter(); showMenu();}
+            3 -> {UI().clearConsole(); deleteFilms(); AppManager.awaitEnter(); showMenu();}
+            4 -> {UI().clearConsole(); watchFilms(); AppManager.awaitEnter(); showMenu();}
+            5 -> {UI().clearConsole(); viewWatchedFilms(); AppManager.awaitEnter(); showMenu();}
+            6 -> {UI().clearConsole(); addFavorites(); AppManager.awaitEnter(); showMenu();}
+            7 -> {UI().clearConsole(); showFavorites(); AppManager.awaitEnter(); showMenu();}
+            8 -> {UI().clearConsole(); showLikesFilm(); AppManager.awaitEnter(); showMenu();}
             0 -> UI().showMainMenu()
             else -> {
                 UI().showMainMenu()
@@ -37,21 +40,53 @@ class FilmUI {
 
     private fun addFilm() {
         println("[Add film]")
-        val fullNameDirector = AppManager.inputString("Nombre y apellido del director:");
-        val genere = AppManager.inputString("Generos de la pelicula:")
-        val age = AppManager.inputInt("Edad recomendada:")
-        val length = AppManager.inputInt("Duracion de la pelicula:")
-        val actor = AppManager.inputString("Actor principal de la pelicula:")
-        val resume = AppManager.inputString("e de la pelicula:")
+        val newFilm = Film(
+        title = AppManager.inputString("Titel: "),
+        director = AppManager.inputString("Nombre y apellido del director:"),
+        genere = AppManager.inputString("Genero de la pelicula:"),
+        mainActor = AppManager.inputString("Actor principal de la pelicula:"),
+        resume = AppManager.inputString("Resumen de la pelicula:"),
+        ageRating = AppManager.inputInt("Edad recomendada:"),
+        duration = AppManager.inputInt("Duracion de la pelicula:"))
 
+        FilmManager.addFilm(newFilm)
     }
 
-    private fun showFilm() {
-        TODO("Not yet implemented")
+    /**
+     *  Print a formatted list of all users
+     */
+    private fun displayUsers()
+    {
+        for(i in FilmItb.filmsDB.indices){
+            val film = FilmItb.filmsDB[i];
+            println("$i: ${film.title}")
+        }
+    }
+
+    private fun showFilms() {
+        displayUsers();
+    }
+
+    private fun selectFilmFromMenu(msg : String) : Film
+    {
+        displayUsers();
+
+        val maxRange = FilmItb.filmsDB.size-1;
+        var selectedFilm = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+
+        while (!AppManager.isInValidRange(0, maxRange, selectedFilm)) {
+            selectedFilm = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+        }
+
+        return FilmItb.filmsDB[selectedFilm]
     }
 
     private fun deleteFilms() {
-        TODO("Not yet implemented")
+        println("[Delete User]")
+
+        val film = selectFilmFromMenu("Which film do you want to delete?", );
+        FilmManager.deleteFilm(film)
+        println("Successfully removed!")
     }
 
     private fun watchFilms() {
@@ -71,6 +106,11 @@ class FilmUI {
     }
 
     private fun showLikesFilm() {
-        TODO("Not yet implemented")
+
+        for(i in FilmItb.filmsDB.indices){
+            val film = FilmItb.filmsDB[i];
+            println("$i: ${film.title}  ${film.likes}")
+        }
     }
+
 }

@@ -8,10 +8,18 @@ class Film(
     val resume: String,
     val ageRating: Int,
     val duration: Int,
+    val likes: Int = 0,
 ){
+
+
     constructor(sValues: List<String>, iValues: List<Int>) :
             this(
-                sValues[0], sValues[1], sValues[2], sValues[3], sValues[4],
-                iValues[0], iValues[1]);
+                title = sValues[0], director = sValues[1], genere = sValues[2], mainActor = sValues[3], resume =  sValues[4],
+                ageRating = iValues[0], duration = iValues[1], likes= iValues[2]);
+}
+
+class test(val name : String)
+{
+    constructor(sValues: String, d:String) : this(name = "1")
 }
 

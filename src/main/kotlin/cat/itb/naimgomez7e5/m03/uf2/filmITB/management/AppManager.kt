@@ -1,9 +1,8 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.management
 
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.Film
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.FilmItb
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.User
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.UI
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.AppState
 import java.net.URL
 import java.net.URLConnection
 import java.util.*
@@ -26,6 +25,25 @@ class AppManager {
                     return false
                 }
             }
+            return true
+        }
+
+        fun isCurrentUser(user : User) : Boolean
+        {
+            if(AppState.currentUser == user)
+            {
+                return true
+            }
+            return false
+
+        }
+
+        fun isInValidRange(minRange: Int, maxRange: Int, toCheck: Int) : Boolean
+        {
+            if(toCheck < minRange)
+                return false
+            if(toCheck > maxRange)
+                return false
             return true
         }
 

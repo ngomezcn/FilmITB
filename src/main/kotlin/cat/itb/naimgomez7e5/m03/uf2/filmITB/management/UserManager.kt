@@ -9,11 +9,10 @@ class UserManager {
         /**
          * Creates a new user, all the fields of the User(...) constructor will be passed
          */
-        fun addUser(name: String, lastName: String, age: Int) {
+        fun addUser(newUser : User) {
             FilmItb.usersDB.add(
-                User(name, lastName, age)
+                newUser
             )
-            println("Usuari creat amb èxit!")
         }
 
         /**
@@ -45,8 +44,6 @@ class UserManager {
             FilmItb.usersDB.removeAt(
                 FilmItb.usersDB.indexOf(user)
             );
-
-            println("Usuari eliminat amb èxit.")
         }
 
         /**

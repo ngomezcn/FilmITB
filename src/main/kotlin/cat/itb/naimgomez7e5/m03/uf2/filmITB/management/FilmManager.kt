@@ -2,27 +2,15 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.management
 
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.Film
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.FilmItb
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.User
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.AppState
 import java.net.URL
 
 class FilmManager {
 
     companion object {
-        fun addFilm(title: String,
-            director: String,
-            genere: String,
-            ageRating: Int,
-            lenght: Int,
-            mainActor: String,
-            resume: String) {
-
-            Film(title,
-                director,
-                genere,
-                mainActor,
-                resume,
-                ageRating,
-                lenght)
+        fun addFilm(newFilm : Film) {
+            FilmItb.filmsDB.add(newFilm);
         }
 
         /**
@@ -49,6 +37,17 @@ class FilmManager {
                 }
                 FilmItb.filmsDB.add(Film(sValues, iValues));
             }
+        }
+
+
+        /**
+         * Deletes the indicated film from the database
+         */
+        fun deleteFilm(film: Film) {
+
+            FilmItb.filmsDB.removeAt(
+                FilmItb.filmsDB.indexOf(film)
+            );
         }
     }
 }
