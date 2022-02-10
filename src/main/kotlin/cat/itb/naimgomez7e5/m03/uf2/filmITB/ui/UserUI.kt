@@ -2,6 +2,7 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.*
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
+import java.util.*
 
 /**
  * Author: Garsemar & Ngomez
@@ -9,7 +10,7 @@ import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
  *
  * Console interface to....
  */
-class UserUI {
+class UserUI(var scan: Scanner) {
 
     fun showMenu() {
         UI().clearConsole();
@@ -23,14 +24,14 @@ class UserUI {
         println("7: Show statistics")
         println("0: Return to main menu")
 
-        when (AppManager.inputInt()) {
-            1 -> {UI().clearConsole(); addUser();    AppManager.awaitEnter(); showMenu();}
-            2 -> {UI().clearConsole(); showUser();   AppManager.awaitEnter(); showMenu();}
-            3 -> {UI().clearConsole(); viewUsers();  AppManager.awaitEnter(); showMenu();}
-            4 -> {UI().clearConsole(); updateUser(); AppManager.awaitEnter(); showMenu();}
-            5 -> {UI().clearConsole(); deleteUser(); AppManager.awaitEnter(); showMenu();}
-            6 -> {UI().clearConsole(); changeUser(); AppManager.awaitEnter(); showMenu();}
-            7 -> {UI().clearConsole(); showStats();  AppManager.awaitEnter(); showMenu();}
+        when (inputInt(scan)) {
+            1 -> addUser()
+            2 -> showUser()
+            3 -> viewUsers()
+            4 -> updateUser()
+            5 ->  deleteUser()
+            6 ->  changeUser()
+            7 ->  showStats()
             0 -> UI().showMainMenu()
             else -> {
                 UI().showMainMenu()
@@ -44,9 +45,9 @@ class UserUI {
     private fun addUser() {
         println("[Add User]")
         val newUser = User(
-            name = AppManager.inputString("User name:"),
-            lastName = AppManager.inputString("User's last name:"),
-            age = AppManager.inputInt("User's age:")
+            name = readInputString(scan, "User name:"),
+            lastName = readInputString(scan,"User's last name:"),
+            //age = inputInt("User's age:")
         )
         UserManager.addUser(newUser);
         println("Usuari creat amb èxit!")
@@ -95,7 +96,7 @@ class UserUI {
     private fun updateUser() {
         println("[Update Users]")
 
-        val user = selectUserFromMenu("Which user do you want to modify?",);
+        val user = selectUserFromMenu("Which user do you want to moaadify?",);
 
         println("[Selected: ${user.name} ${user.lastName}]")
         println("1: Change name")
@@ -103,16 +104,16 @@ class UserUI {
         println("3: Change age")
         println("0: Back to menu")
 
-        when (AppManager.inputInt()) {
+        when (inputInt(scan)) {
             1 -> {
                     UserManager.changeName(
-                                AppManager.inputString("New name:"), user)};
+                                readInputString(scan, "New name:"), user)};
             2 -> {
                     UserManager.changeLastName(
-                                AppManager.inputString("New last name:"), user)};
+                                readInputString(scan, "New last name:"), user)};
             3 -> {
                     UserManager.changeAge(
-                                AppManager.inputInt("New age:"), user)};
+                                inputInt(scan, "New age:"), user)};
             0 -> showMenu()
             else -> {
                 showMenu()
@@ -125,16 +126,14 @@ class UserUI {
         displayUsers();
 
         val maxRange = FilmItb.usersDB.size-1;
-
         while(true) {
-            var selectedUser = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+            var selectedUser = inputInt(scan, "$msg (Number from 0 to $maxRange):")
             while (!AppManager.isInValidRange(0, maxRange, selectedUser)) {
-                selectedUser = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+                selectedUser = inputInt(scan, "$msg (Number from 0 to $maxRange):")
             }
-            if (!AppManager.isCurrentUser(FilmItb.usersDB[selectedUser]) && !allowCurrentUser) {
-                return FilmItb.usersDB[selectedUser];
+            if (!AppManager.isCurrentUser(FilmItb.usersDB[selectedUser]) && allowCurrentUser) {
+                return FilmItb.usersDB[selectedUser]
             }
-            println("\n$errorMsg")
         }
 
         /*displayUsers();

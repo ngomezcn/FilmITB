@@ -8,10 +8,7 @@ import java.net.URL
 
 class FilmManager {
 
-    companion object {
-        fun addFilm(newFilm : Film) {
-            FilmItb.filmsDB.add(newFilm);
-        }
+
 
         /**
          * Load data from remote repo
@@ -49,5 +46,10 @@ class FilmManager {
                 FilmItb.filmsDB.indexOf(film)
             );
         }
+
+    fun addFilm(title: String, director: String, genere: String, mainActor: String, resume: String, ageRating: Int, duration: Int) {
+        val newFilm = FilmItb()
+        newFilm.filmsDB.add(title, director, genere, mainActor, resume, ageRating, duration)
     }
+
 }

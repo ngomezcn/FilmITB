@@ -11,12 +11,12 @@ import java.util.*
 class AppManager {
 
     companion object {
-        private val scan = Scanner(System.`in`)
 
+        private val scan = Scanner(System.`in`)
         /**
-         * Safe interface for string input
+         *
          * */
-        private fun containsCharInRange(s : String, min : Int, max : Int) : Boolean
+        fun containsCharInRange(s : String, min : Int, max : Int) : Boolean
         {
             for (char in s.iterator())
             {
@@ -45,36 +45,6 @@ class AppManager {
             if(toCheck > maxRange)
                 return false
             return true
-        }
-
-        /**
-         * Safe interface for string input
-         * */
-        fun inputInt(msg: String = "Input:"): Int {
-            print("$msg ")
-            var rawInput = scan.nextLine().replace(" ", "")
-
-            while (rawInput == "" || !containsCharInRange(rawInput, 48, 57))
-            {
-                print("$msg ")
-                rawInput = scan.nextLine().replace(" ", "")
-            }
-            return rawInput.toInt()
-        }
-
-        /**
-         * Safe interface for character string input
-         * */
-        fun inputString(msg: String = "Input:"): String {
-            print("$msg ")
-            var input = scan.nextLine().replace(" ", "")
-
-            while (input == "")
-            {
-                print("$msg ")
-                input = scan.nextLine()
-            }
-            return input
         }
 
         /**

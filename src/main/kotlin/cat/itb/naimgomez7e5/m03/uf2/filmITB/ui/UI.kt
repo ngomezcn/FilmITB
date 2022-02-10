@@ -1,7 +1,7 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.*
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
+import java.util.*
 import kotlin.system.exitProcess
 
 
@@ -11,10 +11,10 @@ import kotlin.system.exitProcess
  */
 
 class UI {
-
-    private val userUI = UserUI();
-    private val filmUI = FilmUI();
-    private val searchUI = SearchUI();
+    private val scan = Scanner(System.`in`)
+    private val userUI = UserUI(scan);
+    private val filmUI = FilmUI(scan);
+    private val searchUI = SearchUI(scan);
 
     fun start()
     {

@@ -2,12 +2,14 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.AppManager
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.FilmManager
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.UserManager
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.Film
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.FilmItb
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.User
+import java.util.*
 
-class FilmUI {
+class FilmUI(val scan: Scanner) {
+
+    var filmManager = FilmManager()
+
     fun showMenu()
     {
         UI().clearConsole();
@@ -40,22 +42,22 @@ class FilmUI {
 
     private fun addFilm() {
         println("[Add film]")
-        val newFilm = Film(
-        title = AppManager.inputString("Titel: "),
-        director = AppManager.inputString("Nombre y apellido del director:"),
-        genere = AppManager.inputString("Genero de la pelicula:"),
-        mainActor = AppManager.inputString("Actor principal de la pelicula:"),
-        resume = AppManager.inputString("Resumen de la pelicula:"),
-        ageRating = AppManager.inputInt("Edad recomendada:"),
-        duration = AppManager.inputInt("Duracion de la pelicula:"))
 
-        FilmManager.addFilm(newFilm)
+        val title = readInputString(scan, "Titel: ")
+        val director = readInputString(scan, "Nombre y apellido del director:")
+        val genere = readInputString(scan, "Genero de la pelicula:")
+        val mainActor = readInputString(scan, "Actor principal de la pelicula:")
+        val resume = readInputString(scan, "Resumen de la pelicula:")
+        val ageRating = inputInt(scan, "Edad recomendada:")
+        val duration = inputInt(scan, "Duracion de la pelicula:")
+
+        filmManager.addFilm(title, director,genere,mainActor,resume, ageRating, duration)
     }
 
     /**
-     *  Print a formatted list of all users
+     *  Print a formatted list of all films
      */
-    private fun displayUsers()
+    private fun displayFilms()
     {
         for(i in FilmItb.filmsDB.indices){
             val film = FilmItb.filmsDB[i];
@@ -64,33 +66,34 @@ class FilmUI {
     }
 
     private fun showFilms() {
-        displayUsers();
+        displayFilms();
     }
 
     private fun selectFilmFromMenu(msg : String) : Film
     {
-        displayUsers();
+        displayFilms();
 
         val maxRange = FilmItb.filmsDB.size-1;
-        var selectedFilm = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
-
-        while (!AppManager.isInValidRange(0, maxRange, selectedFilm)) {
-            selectedFilm = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+        while(true) {
+            var selectedFilm = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+            while (!AppManager.isInValidRange(0, maxRange, selectedFilm)) {
+                selectedFilm = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+            }
+            return FilmItb.filmsDB[selectedFilm]
         }
-
-        return FilmItb.filmsDB[selectedFilm]
     }
 
     private fun deleteFilms() {
         println("[Delete User]")
 
         val film = selectFilmFromMenu("Which film do you want to delete?", );
-        FilmManager.deleteFilm(film)
+        filmManager.deleteFilm(film)
         println("Successfully removed!")
     }
 
     private fun watchFilms() {
-        TODO("Not yet implemented")
+        println("[Delete User]")
+
     }
 
     private fun viewWatchedFilms() {
