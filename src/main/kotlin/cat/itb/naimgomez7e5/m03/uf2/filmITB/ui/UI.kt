@@ -12,7 +12,7 @@ import java.util.*
 class UI {
 
     private val scan = Scanner(System.`in`)
-    private val filmITB = FilmItb()
+    private appState = AppState();
 
     private val userUI = UserUI(scan, filmITB)
     private val filmUI = FilmUI(scan, filmITB)

@@ -7,5 +7,10 @@ import java.util.*
 class AppState(){
 
     var currentUser : User = User("guest", "guest", -1)
+    val films = mutableListOf<Film>()
+    val users = mutableListOf<User>()
+
+    private val filmITB = FilmItb()
+
 }
 
