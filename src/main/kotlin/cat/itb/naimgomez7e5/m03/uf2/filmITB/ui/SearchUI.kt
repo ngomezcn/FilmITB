@@ -1,10 +1,13 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.management.*
+
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.*
 import java.util.*
 
+class SearchUI(private val scan: Scanner, private val filmItb: FilmItb) {
 
-class SearchUI(scan: Scanner) {
     fun showMenu() {
+
         println("Search methods:")
         println("1: By title")
         println("2: By director")
@@ -15,7 +18,8 @@ class SearchUI(scan: Scanner) {
         println("7: Recomended")
         println("0: Return to main menu")
 
-        when (AppManager.inputInt()) {
+
+        when (inputInt(scan)) {
             1 -> searchByTitle()
             2 -> searchByDirector()
             3 -> searchByMainActor()
