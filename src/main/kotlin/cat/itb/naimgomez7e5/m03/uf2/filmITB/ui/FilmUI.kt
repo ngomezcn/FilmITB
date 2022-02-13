@@ -1,14 +1,16 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.*
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.Film
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.FilmItb
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.isInValidRange
 import java.util.*
 
-class FilmUI(private val scan: Scanner, private val filmItb: FilmItb) {
+class FilmUI(val scan: Scanner, val appState : AppState) {
 
-    fun showMenu()
+    fun showFilmMenu()
     {
-        while(true) {
+        while (true) {
+
             println("Films:")
             println("1: Add film")
             println("2: Show films")
@@ -21,19 +23,20 @@ class FilmUI(private val scan: Scanner, private val filmItb: FilmItb) {
             println("0: Return to main menu")
 
             when (inputInt(scan)) {
-                1 -> addFilm()
-                2 -> showFilms()
-                3 -> deleteFilms()
-                4 -> watchFilms()
-                5 -> viewWatchedFilms()
-                6 -> addFavorites()
-                7 -> showFavorites()
-                8 -> showLikesFilm()
-                0 -> UI().showMainMenu()
+                1 -> addFilm();
+                2 -> showFilms();
+                3 -> deleteFilms();
+                4 -> watchFilms();
+                5 -> viewWatchedFilms();
+                6 -> addFavorites();
+                7 -> showFavorites();
+                8 -> showLikesFilm();
+                0 -> return
                 else -> {
-                    UI().showMainMenu()
+                    return
                 }
             }
+            showFilmMenu();
         }
     }
 
@@ -48,7 +51,7 @@ class FilmUI(private val scan: Scanner, private val filmItb: FilmItb) {
         val ageRating = inputInt(scan, "Edad recomendada:")
         val duration = inputInt(scan, "Duracion de la pelicula:")
 
-        filmItb.addFilm(title, director,genere,mainActor,resume, ageRating, duration)
+        appState.filmItb.addFilm(title, director,genere,mainActor,resume, ageRating, duration)
     }
 
     /**
@@ -56,41 +59,40 @@ class FilmUI(private val scan: Scanner, private val filmItb: FilmItb) {
      */
     private fun displayFilms()
     {
-        for(i in filmItb.films.indices){
-            val film = filmItb.films[i]
+        for(i in appState.filmItb.films.indices){
+            val film = appState.filmItb.films[i];
             println("$i: ${film.title}")
         }
     }
 
     private fun showFilms() {
-        displayFilms()
+        displayFilms();
     }
 
     private fun selectFilmFromMenu(msg : String) : Film
     {
-        displayFilms()
+        displayFilms();
 
-        val maxRange = filmItb.films.size-1
+        val maxRange = appState.filmItb.films.size-1;
         while(true) {
-            var selectedFilm = inputInt(scan,"$msg (Number from 0 to $maxRange):")
+            var selectedFilm = inputInt(scan, "$msg (Number from 0 to $maxRange):")
             while (!isInValidRange(0, maxRange, selectedFilm)) {
                 selectedFilm = inputInt(scan, "$msg (Number from 0 to $maxRange):")
             }
-            return filmItb.films[selectedFilm]
+            return appState.filmItb.films[selectedFilm]
         }
     }
 
     private fun deleteFilms() {
         println("[Delete User]")
 
-        val film = selectFilmFromMenu("Which film do you want to delete?", )
-        filmItb.deleteFilm(film)
+        val film = selectFilmFromMenu("Which film do you want to delete?", );
+        appState.filmItb.deleteFilm(film)
         println("Successfully removed!")
     }
 
     private fun watchFilms() {
-        println("[Watch films]")
-        selectFilmFromMenu("Which movie do you want to watch?")
+        println("[Delete User]")
 
     }
 
@@ -108,10 +110,9 @@ class FilmUI(private val scan: Scanner, private val filmItb: FilmItb) {
 
     private fun showLikesFilm() {
 
-        for(i in filmItb.films.indices){
-            val film = filmItb.films[i]
+        for(i in appState.filmItb.films.indices){
+            val film = appState.filmItb.films[i];
             println("$i: ${film.title}  ${film.likes}")
         }
     }
-
 }

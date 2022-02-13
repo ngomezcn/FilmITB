@@ -1,7 +1,8 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.*
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.isCurrentUser
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.isInValidRange
 import java.util.*
 
 /**
@@ -10,9 +11,10 @@ import java.util.*
  *
  * Console interface to....
  */
-class UserUI (private val scan: Scanner, private val filmItb: FilmItb) {
-    fun showMenu() {
-        while(true) {
+class UserUI(val scan: Scanner, val appState : AppState) {
+
+    fun showUsersMenu() {
+        while (true) {
             println("Users:")
             println("1: Add user")
             println("2: Show my user")
@@ -31,11 +33,12 @@ class UserUI (private val scan: Scanner, private val filmItb: FilmItb) {
                 5 -> deleteUser()
                 6 -> changeUser()
                 7 -> showStats()
-                0 -> UI().showMainMenu()
+                0 -> return
                 else -> {
-                    UI().showMainMenu()
+                    return
                 }
             }
+            showUsersMenu()
         }
     }
 
@@ -44,12 +47,11 @@ class UserUI (private val scan: Scanner, private val filmItb: FilmItb) {
      */
     private fun addUser() {
         println("[Add User]")
-        filmItb.addUser(
-            readInputString(scan, "User name:"),
-            readInputString(scan,"User's last name:"),
-            inputInt(scan,"User's age:")
-        )
+        appState.filmItb.addUser(
 
+            name = readInputString(scan, "User name:"),
+            lastName = readInputString(scan,"User's last name:"),
+            age = inputInt(scan,"User's age:"));
         println("Usuari creat amb èxit!")
     }
 
@@ -58,10 +60,10 @@ class UserUI (private val scan: Scanner, private val filmItb: FilmItb) {
      */
     private fun displayUsers()
     {
-        for(i in filmItb.users.indices){
-            val user = filmItb.users[i];
+        for(i in appState.filmItb.users.indices){
+            val user = appState.filmItb.users[i];
 
-            if(user == filmItb.appState.currentUser)
+            if(user == AppState.currentUser)
             {
                 println("$i: ${user.name} ${user.lastName} (Current logged)")
             } else
@@ -76,9 +78,9 @@ class UserUI (private val scan: Scanner, private val filmItb: FilmItb) {
      */
     private fun showUser() {
         println("[Show User]")
-        println("Name: ${filmItb.appState.currentUser.name}")
-        println("Last name: ${filmItb.appState.currentUser.lastName}")
-        println("Age: ${filmItb.appState.currentUser.age}")
+        println("Name: ${AppState.currentUser.name}")
+        println("Last name: ${AppState.currentUser.lastName}")
+        println("Age: ${AppState.currentUser.age}")
     }
 
     /**
@@ -86,7 +88,7 @@ class UserUI (private val scan: Scanner, private val filmItb: FilmItb) {
      */
     private fun viewUsers(){
         println("[View Users]")
-        displayUsers()
+        displayUsers();
     }
 
     /**
@@ -95,7 +97,7 @@ class UserUI (private val scan: Scanner, private val filmItb: FilmItb) {
     private fun updateUser() {
         println("[Update Users]")
 
-        val user = selectUserFromMenu("Which user do you want to moaadify?",)
+        val user = selectUserFromMenu("Which user do you want to moaadify?",);
 
         println("[Selected: ${user.name} ${user.lastName}]")
         println("1: Change name")
@@ -105,53 +107,50 @@ class UserUI (private val scan: Scanner, private val filmItb: FilmItb) {
 
         when (inputInt(scan)) {
             1 -> {
-                filmItb.changeName(
-                                readInputString(scan, "New name:"), user)}
+                    appState.filmItb.changeName(readInputString(scan, "New name:"), user)};
             2 -> {
-                filmItb.changeLastName(
-                                readInputString(scan, "New last name:"), user)}
+                    appState.filmItb.changeLastName(readInputString(scan, "New last name:"), user)};
             3 -> {
-                filmItb.changeAge(
-                                inputInt(scan, "New age:"), user)}
-            0 -> showMenu()
+                    appState.filmItb.changeAge(inputInt(scan, "New age:"), user)};
+            0 -> return
             else -> {
-                showMenu()
+                return
             }
         }
     }
 
     private fun selectUserFromMenu(msg : String, allowCurrentUser : Boolean = true, errorMsg : String = msg) : User
     {
-        /*displayUsers()
+        displayUsers();
 
-        val maxRange = filmItb.users.size-1
+        val maxRange = appState.filmItb.users.size-1;
         while(true) {
             var selectedUser = inputInt(scan, "$msg (Number from 0 to $maxRange):")
             while (!isInValidRange(0, maxRange, selectedUser)) {
                 selectedUser = inputInt(scan, "$msg (Number from 0 to $maxRange):")
             }
-            if (!filmItb.isCurrentUser(filmItb.users[selectedUser]) && !allowCurrentUser) {
-                return filmItb.users[selectedUser]
+            if (!isCurrentUser(appState.filmItb.users[selectedUser]) && allowCurrentUser) {
+                return appState.filmItb.users[selectedUser]
             }
-        }*/
+        }
 
-        displayUsers()
-        val maxRange = filmItb.users.size-1
-        var selectedUser : Int
+        /*displayUsers();
+        var maxRange = FilmItb.usersDB.size-1;
+        var selectedUser : Int;
         while(true){
-            selectedUser = inputInt(scan, "$msg (Number from 0 to $maxRange):")
-            if(isInValidRange(0, maxRange, selectedUser))
+            selectedUser = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
+            if(AppManager.isInValidRange(0, maxRange, selectedUser))
             {
-                if(filmItb.isCurrentUser(filmItb.users[selectedUser]) && !allowCurrentUser)
+                if(AppManager.isCurrentUser(FilmItb.usersDB[selectedUser]) && !allowCurrentUser)
                 {
                     println("\n$errorMsg")
                 }
                 else
                 {
-                    return filmItb.users[selectedUser]
+                    return FilmItb.usersDB[selectedUser];
                 }
             }
-        }
+        }*/
     }
 
     /**
@@ -160,20 +159,20 @@ class UserUI (private val scan: Scanner, private val filmItb: FilmItb) {
     private fun deleteUser(){
         println("[Delete User]")
 
-        val user = selectUserFromMenu("Which user do you want to delete?", false,"You can't delete the user that is currently logged in!")
-        filmItb.deleteUser(user)
+        val user = selectUserFromMenu("Which user do you want to delete?", false,"You can't delete the user that is currently logged in!");
+        appState.filmItb.deleteUser(user)
         println("Successfully removed!")
     }
     private fun changeUser(){
         println("[Change User]")
 
-        val user = selectUserFromMenu("Select the user: ", false, "You are already logged with this user")
-        filmItb.appState.currentUser = user
+        val user = selectUserFromMenu("Select the user to login", false, "You are already logged with this user")
+        AppState.currentUser = user
 
-        println("Done!\n Current user: ${filmItb.appState.currentUser.name}")
+        println("Done!\n Current user: ${AppState.currentUser.name}")
     }
     private fun showStats(){
         println("TODO: showStats()")
-        exit()
+        UI().exit()
     }
 }

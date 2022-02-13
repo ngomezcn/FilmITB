@@ -18,4 +18,8 @@ class Film(
                 ageRating = iValues[0], duration = iValues[1], likes= iValues[2]);
 }
 
+class test(val name : String)
+{
+    constructor(sValues: String, d:String) : this(name = "1")
+}
 

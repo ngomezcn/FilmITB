@@ -1,8 +1,7 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.*
 import java.util.*
+import kotlin.system.exitProcess
 
 /**
  *  Coding conventions
@@ -10,50 +9,52 @@ import java.util.*
  */
 
 class UI {
+    private val appState = AppState();
 
-    private val scan = Scanner(System.`in`)
-    private appState = AppState();
 
-    private val userUI = UserUI(scan, filmITB)
-    private val filmUI = FilmUI(scan, filmITB)
-    private val searchUI = SearchUI(scan, filmITB)
-    private val loginUI = LoginUI(scan, filmITB)
+    private val scan = Scanner(System.`in`);
+    private val userUI = UserUI(scan, appState);
+    private val filmUI = FilmUI(scan, appState);
+    private val searchUI = SearchUI(scan, appState);
+    private val loginUI = LoginUI(scan, appState);
+
 
     fun start()
     {
         println("Loading..... ")
         println("Please wait....")
-        filmITB.loadData()
+        appState.filmItb.loadData()
 
-        loginUI.showMenu()
-        showMainMenu()
+        loginUI.showLoginMenu()
+        showMainMenu();
     }
 
     fun showMainMenu()
     {
-        println("Welcome ${filmITB.appState.currentUser.name} to FilmsITB")
+        println("Welcome ${AppState.currentUser.name} to FilmsITB")
         println("1: User")
         println("2: Films")
         println("3: Search")
         println("0: Exit")
 
         when (inputInt(scan)) {
-            1 -> userUI.showMenu()
-            2 -> filmUI.showMenu()
-            3 -> searchUI.showMenu()
-            0 -> exit()
+            1 -> userUI.showUsersMenu();
+            2 -> filmUI.showFilmMenu();
+            3 -> searchUI.showSearchMenu();
+            0 -> return;
             else -> {
-                return
+                return;
             }
         }
     }
 
+    fun exit(status : Int = 0)
+    {
+        exitProcess(status);
+    }
 }
-
 // https://drive.google.com/drive/folders/1ZlpA5C8LNe2BCB_bIqz1XHsx-nwZm48M?usp=sharing
 fun main()
 {
     UI().start()
-
-
 }
