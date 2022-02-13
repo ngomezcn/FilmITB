@@ -1,10 +1,12 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 import java.util.*
 
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
 
-class SearchUI(var scan: Scanner, val appState : AppState) {
+class SearchUI(var scan: Scanner, var appState : AppState) {
 
-    fun showSearchMenu() {
+    fun showSearchMenu() : AppState  {
+
 
         while (true) {
             println("Search methods:")
@@ -26,9 +28,10 @@ class SearchUI(var scan: Scanner, val appState : AppState) {
                 5 -> searchByLength()
                 6 -> searchByNotWatched()
                 7 -> searchByRecommended()
-                0 -> return
+                0 -> return appState
+
                 else -> {
-                    return
+                    return appState
                 }
             }
             showSearchMenu();
@@ -36,11 +39,43 @@ class SearchUI(var scan: Scanner, val appState : AppState) {
     }
 
     private fun searchByTitle() {
-
+        val title = inputString(scan, "Search: ")
+        var matchedFilms : List<Film> = appState.filmItb.searchFilmByTitle(title)
+        if(matchedFilms.isEmpty())
+        {
+            println("No matches found!")
+        } else
+        {
+            for (film in matchedFilms)
+            {
+                displayFilmStats(film)
+            }
+        }
     }
     private fun searchByDirector() {
-
+        val fullName = inputString(scan, "Search:")
+        var matchedFilms : List<Film> = appState.filmItb.searchFilmByTitle(fullName)
+        if(matchedFilms.isEmpty())
+        {
+            println("No matches found!")
+        } else
+        {
+            for (film in matchedFilms)
+            {
+                displayFilmStats(film)
+            }
+        }
     }
+
+    private fun displayFilmStats(film : Film)
+    {
+        println("Title: ${film.title}")
+        println("Duration: ${film.duration}")
+        println("Duration: ${film.director}")
+        println("Likes: ${film.likes}")
+        println("===================")
+    }
+
     private fun searchByMainActor() {
 
     }

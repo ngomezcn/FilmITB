@@ -3,7 +3,7 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.containsCharInRange
 import java.util.*
 
-fun readInputString( sc:Scanner, msg: String = "Input:"): String {
+fun inputString(sc:Scanner, msg: String = "Input:"): String {
     print("$msg ")
     var input = sc.nextLine().replace(" ", "")
 

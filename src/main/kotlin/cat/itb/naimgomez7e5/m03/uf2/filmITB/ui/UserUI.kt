@@ -11,9 +11,11 @@ import java.util.*
  *
  * Console interface to....
  */
-class UserUI(val scan: Scanner, val appState : AppState) {
+class UserUI(val scan: Scanner, var appState : AppState) {
 
-    fun showUsersMenu() {
+
+    fun showUsersMenu() : AppState {
+
         while (true) {
             println("Users:")
             println("1: Add user")
@@ -33,9 +35,9 @@ class UserUI(val scan: Scanner, val appState : AppState) {
                 5 -> deleteUser()
                 6 -> changeUser()
                 7 -> showStats()
-                0 -> return
+                0 -> return appState
                 else -> {
-                    return
+                    return appState
                 }
             }
             showUsersMenu()
@@ -49,8 +51,8 @@ class UserUI(val scan: Scanner, val appState : AppState) {
         println("[Add User]")
         appState.filmItb.addUser(
 
-            name = readInputString(scan, "User name:"),
-            lastName = readInputString(scan,"User's last name:"),
+            name = inputString(scan, "User name:"),
+            lastName = inputString(scan,"User's last name:"),
             age = inputInt(scan,"User's age:"));
         println("Usuari creat amb èxit!")
     }
@@ -107,9 +109,9 @@ class UserUI(val scan: Scanner, val appState : AppState) {
 
         when (inputInt(scan)) {
             1 -> {
-                    appState.filmItb.changeName(readInputString(scan, "New name:"), user)};
+                    appState.filmItb.changeName(inputString(scan, "New name:"), user)};
             2 -> {
-                    appState.filmItb.changeLastName(readInputString(scan, "New last name:"), user)};
+                    appState.filmItb.changeLastName(inputString(scan, "New last name:"), user)};
             3 -> {
                     appState.filmItb.changeAge(inputInt(scan, "New age:"), user)};
             0 -> return

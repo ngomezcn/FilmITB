@@ -6,8 +6,9 @@ import java.util.*
 
 class FilmUI(val scan: Scanner, val appState : AppState) {
 
-    fun showFilmMenu()
+    fun showFilmMenu() : AppState
     {
+
         while (true) {
 
             println("Films:")
@@ -32,7 +33,7 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
                 8 -> showLikesFilm()
                 0 -> return appState
                 else -> {
-                    return
+                    return appState
                 }
             }
             showFilmMenu()
@@ -42,11 +43,11 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
     private fun addFilm() {
         println("[Add film]")
 
-        val title = readInputString(scan, "Titel: ")
-        val director = readInputString(scan, "Nombre y apellido del director:")
-        val genere = readInputString(scan, "Genero de la pelicula:")
-        val mainActor = readInputString(scan, "Actor principal de la pelicula:")
-        val resume = readInputString(scan, "Resumen de la pelicula:")
+        val title = inputString(scan, "Titel: ")
+        val director = inputString(scan, "Nombre y apellido del director:")
+        val genere = inputString(scan, "Genero de la pelicula:")
+        val mainActor = inputString(scan, "Actor principal de la pelicula:")
+        val resume = inputString(scan, "Resumen de la pelicula:")
         val ageRating = inputInt(scan, "Edad recomendada:")
         val duration = inputInt(scan, "Duracion de la pelicula:")
 

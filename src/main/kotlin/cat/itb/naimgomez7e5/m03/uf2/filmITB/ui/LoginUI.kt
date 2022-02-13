@@ -8,14 +8,14 @@ class LoginUI(var scan: Scanner, val appState : AppState) {
     {
         println("[Sign-In]")
 
-        var name = readInputString(scan, "Indicate your username:");
+        var name = inputString(scan, "Indicate your username:");
         var user = appState.filmItb.getUserByName(name);
 
         while (user == null)
         {
             println("Aquest usuari no existeix!")
             println("Torna a indicar el nom de l'usuari que vols utilitzar.")
-            name = readInputString(scan, "Username:");
+            name = inputString(scan, "Username:");
             user = appState.filmItb.getUserByName(name);
         }
         AppState.currentUser = user;

@@ -9,18 +9,15 @@ import kotlin.system.exitProcess
  */
 
 class UI {
-    private val appState = AppState();
-
+    private var appState = AppState();
 
     private val scan = Scanner(System.`in`);
-    private val userUI = UserUI(scan, appState);
-    private val filmUI = FilmUI(scan, appState);
-    private val searchUI = SearchUI(scan, appState);
-    private val loginUI = LoginUI(scan, appState);
+    private var userUI = UserUI(scan, appState);
+    private var filmUI = FilmUI(scan, appState);
+    private var searchUI = SearchUI(scan, appState);
+    private var loginUI = LoginUI(scan, appState);
 
-
-    fun start()
-    {
+    fun start() {
         println("Loading..... ")
         println("Please wait....")
         appState.filmItb.loadData()
@@ -31,23 +28,25 @@ class UI {
 
     fun showMainMenu()
     {
-        println("Welcome ${AppState.currentUser.name} to FilmsITB")
-        println("1: User")
-        println("2: Films")
-        println("3: Search")
-        println("0: Exit")
-
-        when (inputInt(scan)) {
-            1 -> userUI.showUsersMenu();
-            2 -> filmUI.showFilmMenu();
-            3 -> searchUI.showSearchMenu();
-            0 -> return;
-            else -> {
-                return;
+            println("Welcome ${AppState.currentUser.name} to FilmsITB")
+            println("1: User")
+            println("2: Films")
+            println("3: Search")
+            println("0: Exit")
+            userUI = UserUI(scan, appState);
+            filmUI = FilmUI(scan, appState);
+            searchUI = SearchUI(scan, appState);
+            when (inputInt(scan)) {
+                1 -> appState = userUI.showUsersMenu();
+                2 -> appState = filmUI.showFilmMenu();
+                3 -> appState = searchUI.showSearchMenu();
+                0 -> return;
+                else -> {
+                    return;
+                }
             }
-        }
+         showMainMenu()
     }
-
     fun exit(status : Int = 0)
     {
         exitProcess(status);

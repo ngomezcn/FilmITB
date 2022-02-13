@@ -8,7 +8,7 @@ class Film(
     val resume: String,
     val ageRating: Int,
     val duration: Int,
-    val likes: Int = 0,
+    var likes: Int = 0,
 ){
     constructor(sValues: List<String>, iValues: List<Int>) :
             this(
