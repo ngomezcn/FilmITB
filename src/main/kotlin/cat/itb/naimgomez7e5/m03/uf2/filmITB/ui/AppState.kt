@@ -7,7 +7,7 @@ class AppState {
     val filmItb = FilmItb();
 
     companion object {
-        lateinit var currentUser : User;
+        lateinit var currentUser : User
     }
 }
 

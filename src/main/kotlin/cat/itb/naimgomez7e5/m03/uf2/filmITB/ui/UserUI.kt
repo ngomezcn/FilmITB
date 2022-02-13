@@ -121,36 +121,24 @@ class UserUI(val scan: Scanner, val appState : AppState) {
 
     private fun selectUserFromMenu(msg : String, allowCurrentUser : Boolean = true, errorMsg : String = msg) : User
     {
+
         displayUsers();
-
         val maxRange = appState.filmItb.users.size-1;
-        while(true) {
-            var selectedUser = inputInt(scan, "$msg (Number from 0 to $maxRange):")
-            while (!isInValidRange(0, maxRange, selectedUser)) {
-                selectedUser = inputInt(scan, "$msg (Number from 0 to $maxRange):")
-            }
-            if (!isCurrentUser(appState.filmItb.users[selectedUser]) && allowCurrentUser) {
-                return appState.filmItb.users[selectedUser]
-            }
-        }
-
-        /*displayUsers();
-        var maxRange = FilmItb.usersDB.size-1;
         var selectedUser : Int;
         while(true){
-            selectedUser = AppManager.inputInt("$msg (Number from 0 to $maxRange):")
-            if(AppManager.isInValidRange(0, maxRange, selectedUser))
+            selectedUser = inputInt(scan, "$msg (Number from 0 to $maxRange):")
+            if(isInValidRange(0, maxRange, selectedUser))
             {
-                if(AppManager.isCurrentUser(FilmItb.usersDB[selectedUser]) && !allowCurrentUser)
+                if(isCurrentUser(appState.filmItb.users[selectedUser]) && !allowCurrentUser)
                 {
                     println("\n$errorMsg")
                 }
                 else
                 {
-                    return FilmItb.usersDB[selectedUser];
+                    return appState.filmItb.users[selectedUser]
                 }
             }
-        }*/
+        }
     }
 
     /**

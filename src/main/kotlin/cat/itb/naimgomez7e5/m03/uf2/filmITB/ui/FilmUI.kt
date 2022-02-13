@@ -1,7 +1,6 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.Film
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.FilmItb
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.isInValidRange
 import java.util.*
 
@@ -23,20 +22,20 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
             println("0: Return to main menu")
 
             when (inputInt(scan)) {
-                1 -> addFilm();
-                2 -> showFilms();
-                3 -> deleteFilms();
-                4 -> watchFilms();
-                5 -> viewWatchedFilms();
-                6 -> addFavorites();
-                7 -> showFavorites();
-                8 -> showLikesFilm();
-                0 -> return
+                1 -> addFilm()
+                2 -> showFilms()
+                3 -> deleteFilms()
+                4 -> watchFilms()
+                5 -> viewWatchedFilms()
+                6 -> addFavorites()
+                7 -> showFavorites()
+                8 -> showLikesFilm()
+                0 -> return appState
                 else -> {
                     return
                 }
             }
-            showFilmMenu();
+            showFilmMenu()
         }
     }
 
@@ -60,20 +59,20 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
     private fun displayFilms()
     {
         for(i in appState.filmItb.films.indices){
-            val film = appState.filmItb.films[i];
+            val film = appState.filmItb.films[i]
             println("$i: ${film.title}")
         }
     }
 
     private fun showFilms() {
-        displayFilms();
+        displayFilms()
     }
 
     private fun selectFilmFromMenu(msg : String) : Film
     {
-        displayFilms();
+        displayFilms()
 
-        val maxRange = appState.filmItb.films.size-1;
+        val maxRange = appState.filmItb.films.size-1
         while(true) {
             var selectedFilm = inputInt(scan, "$msg (Number from 0 to $maxRange):")
             while (!isInValidRange(0, maxRange, selectedFilm)) {
@@ -86,32 +85,36 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
     private fun deleteFilms() {
         println("[Delete User]")
 
-        val film = selectFilmFromMenu("Which film do you want to delete?", );
+        val film = selectFilmFromMenu("Which film do you want to delete?", )
         appState.filmItb.deleteFilm(film)
         println("Successfully removed!")
     }
 
     private fun watchFilms() {
-        println("[Delete User]")
-
+        println("[Watch films]")
+        val film = appState.filmItb.watchedFilms(selectFilmFromMenu("Which movie do you want to watch?"))
+        println("The movie has been viewed '${film.title}'")
     }
 
     private fun viewWatchedFilms() {
-        TODO("Not yet implemented")
+        println("[Watched films]")
+        appState.filmItb.displayWatchedFilms()
     }
 
     private fun addFavorites() {
-        TODO("Not yet implemented")
+        println("[Add favorites]")
+        val film = appState.filmItb.addFavorites(selectFilmFromMenu("Which movie do you want to watch?"))
+        println("The movie interstellar ${film.title} has been added to favorites")
     }
 
     private fun showFavorites() {
-        TODO("Not yet implemented")
+        println("[Show favorites]")
+        appState.filmItb.showFavorites()
     }
 
     private fun showLikesFilm() {
-
         for(i in appState.filmItb.films.indices){
-            val film = appState.filmItb.films[i];
+            val film = appState.filmItb.films[i]
             println("$i: ${film.title}  ${film.likes}")
         }
     }

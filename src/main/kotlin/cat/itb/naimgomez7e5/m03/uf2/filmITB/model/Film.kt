@@ -10,8 +10,6 @@ class Film(
     val duration: Int,
     val likes: Int = 0,
 ){
-
-
     constructor(sValues: List<String>, iValues: List<Int>) :
             this(
                 title = sValues[0], director = sValues[1], genere = sValues[2], mainActor = sValues[3], resume =  sValues[4],

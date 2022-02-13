@@ -60,6 +60,40 @@ class FilmItb {
                 newFilm.films.add(Film(title, director, genere, mainActor, resume, ageRating, duration))
         }
 
+        fun watchedFilms(film: Film): Film {
+
+                AppState.currentUser.watchedFilms.add(film);
+                return film
+        }
+
+        fun displayWatchedFilms() {
+                for (i in AppState.currentUser.watchedFilms.indices) {
+                        println("$i ${AppState.currentUser.watchedFilms[i].title}")
+                }
+        }
+
+        fun addFavorites(film: Film): Film {
+                for(i in AppState.currentUser.likedFilms.indices){
+                        if(AppState.currentUser.likedFilms[i].title == film.title){
+                                film.likes = film.likes + 1
+                        }
+                }
+                AppState.currentUser.likedFilms.add(film)
+                return film
+        }
+
+        fun showFavorites() {
+                for (i in AppState.currentUser.likedFilms.indices) {
+                        println("$i ${AppState.currentUser.likedFilms[i].title}")
+                }
+        }
+
+        fun likesPerFilm() {
+                for (i in AppState.currentUser.likedFilms.indices) {
+                        println("$i ${AppState.currentUser.likedFilms[i].title} ${AppState.currentUser.likedFilms[i].likes}")
+                }
+        }
+
         /**
          * Creates a new user, all the fields of the User(...) constructor will be passed
          */
