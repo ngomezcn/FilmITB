@@ -7,7 +7,6 @@ class SearchUI(var scan: Scanner, var appState : AppState) {
 
     fun showSearchMenu() : AppState  {
 
-
         while (true) {
             println("Search methods:")
             println("1: By title")
@@ -19,7 +18,6 @@ class SearchUI(var scan: Scanner, var appState : AppState) {
             println("7: Recomended")
             println("0: Return to main menu")
 
-
             when (inputInt(scan)) {
                 1 -> searchByTitle()
                 2 -> searchByDirector()
@@ -29,66 +27,88 @@ class SearchUI(var scan: Scanner, var appState : AppState) {
                 6 -> searchByNotWatched()
                 7 -> searchByRecommended()
                 0 -> return appState
-
                 else -> {
                     return appState
                 }
             }
-            showSearchMenu();
         }
     }
 
     private fun searchByTitle() {
         val title = inputString(scan, "Search: ")
+
         var matchedFilms : List<Film> = appState.filmItb.searchFilmByTitle(title)
         if(matchedFilms.isEmpty())
-        {
             println("No matches found!")
-        } else
-        {
-            for (film in matchedFilms)
-            {
-                displayFilmStats(film)
-            }
-        }
+        else
+            displayFilmList(matchedFilms)
     }
+
     private fun searchByDirector() {
-        val fullName = inputString(scan, "Search:")
-        var matchedFilms : List<Film> = appState.filmItb.searchFilmByTitle(fullName)
+        val director = inputString(scan, "Search:")
+
+        var matchedFilms : List<Film> = appState.filmItb.searchDirectorByDirector(director)
         if(matchedFilms.isEmpty())
-        {
             println("No matches found!")
-        } else
+        else
+            displayFilmList(matchedFilms)
+    }
+
+    private fun searchByMainActor() {
+        val mainActor = inputString(scan, "Search:")
+
+        var matchedFilms : List<Film> = appState.filmItb.searchFilmByMainActor(mainActor)
+        if(matchedFilms.isEmpty())
+            println("No matches found!")
+        else
+            displayFilmList(matchedFilms)
+    }
+
+    private fun searchByGenere() {
+        val genere = inputString(scan, "Search:")
+
+        var matchedFilms : List<Film> = appState.filmItb.searchFilmByMainGenere(genere)
+        if(matchedFilms.isEmpty())
+            println("No matches found!")
+        else
+            displayFilmList(matchedFilms)
+    }
+
+    private fun searchByLength() {
+        val duration = inputInt(scan, "Search:")
+
+        var matchedFilms : List<Film> = appState.filmItb.searchFilmByDuration(duration)
+        if(matchedFilms.isEmpty())
+            println("No matches found!")
+        else
+            displayFilmList(matchedFilms)
+    }
+
+    private fun searchByNotWatched() {
+        var matchedFilms : List<Film> = appState.filmItb.searchFilmByNotWatched();
+        displayFilmList(matchedFilms)
+    }
+
+    private fun searchByRecommended() {
+
+    }
+
+    private fun displayFilmList(list : List<Film>)
+    {
+        for (film in list)
         {
-            for (film in matchedFilms)
-            {
-                displayFilmStats(film)
-            }
+            displayFilmStats(film)
         }
     }
 
     private fun displayFilmStats(film : Film)
     {
         println("Title: ${film.title}")
+        println("Director: ${film.director}")
+        println("Main Actor: ${film.mainActor}")
+        println("Genere: ${film.genere}")
         println("Duration: ${film.duration}")
-        println("Duration: ${film.director}")
-        println("Likes: ${film.likes}")
         println("===================")
-    }
-
-    private fun searchByMainActor() {
-
-    }
-    private fun searchByGenere() {
-
-    }
-    private fun searchByLength() {
-
-    }
-    private fun searchByNotWatched() {
-
-    }
-    private fun searchByRecommended() {
     }
 }
 

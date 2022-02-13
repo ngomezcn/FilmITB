@@ -40,7 +40,6 @@ class UserUI(val scan: Scanner, var appState : AppState) {
                     return appState
                 }
             }
-            showUsersMenu()
         }
     }
 

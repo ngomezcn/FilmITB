@@ -37,7 +37,6 @@ class FilmItb {
                                         iValues.add(i.toInt())
                                 }
                         }
-                        println("$sValues $iValues")
                         films.add(Film(sValues, iValues));
                 }
         }
@@ -73,7 +72,7 @@ class FilmItb {
 
         fun displayWatchedFilms() {
                 for (i in AppState.currentUser.watchedFilms.indices) {
-                        println("$i ${AppState.currentUser.watchedFilms[i].title}")
+                        println("$i: ${AppState.currentUser.watchedFilms[i].title}")
                 }
         }
 
@@ -87,16 +86,20 @@ class FilmItb {
                 return film
         }
 
-        fun showFavorites() {
-                for (i in AppState.currentUser.likedFilms.indices) {
-                        println("$i ${AppState.currentUser.likedFilms[i].title}")
+        fun showFavorites(): MutableList<Film> {
+                val filmList = mutableListOf<Film>()
+                for (liked in AppState.currentUser.likedFilms) {
+                        filmList.add(liked)
                 }
+                return filmList;
         }
 
-        fun likesPerFilm() {
-                for (i in AppState.currentUser.likedFilms.indices) {
-                        println("$i ${AppState.currentUser.likedFilms[i].title} ${AppState.currentUser.likedFilms[i].likes}")
+        fun likesPerFilm(): MutableList<Film> {
+                val filmList = mutableListOf<Film>()
+                for (liked in AppState.currentUser.likedFilms) {
+                        filmList.add(liked)
                 }
+                return filmList;
         }
 
         /**
@@ -174,25 +177,72 @@ class FilmItb {
                 }
         }
 
-        fun searchFilmByTitle(titleSearch: String): MutableList<Film> {
+        fun searchFilmByTitle(search: String): MutableList<Film> {
 
-                val matchedFilms = mutableListOf<Film>()
+                val matchList = mutableListOf<Film>()
                 for (film in films) {
-                        if (titleSearch.lowercase() == film.title.lowercase()) {
-                                matchedFilms.add(film);
+                        if (search.lowercase() == film.title.lowercase()) {
+                                matchList.add(film);
                         }
                 }
-                return matchedFilms
+                return matchList
         }
 
-        fun searchDirectorByFullName(nameSearch: String): MutableList<Film> {
+        fun searchDirectorByDirector(search: String): MutableList<Film> {
 
-                val matchedDirectors = mutableListOf<Film>()
+                val matchList = mutableListOf<Film>()
                 for (film in films) {
-                        if (nameSearch.lowercase() == film.title) {
-                                matchedDirectors.add(film);
+                        if (search.lowercase() == film.director) {
+                                matchList.add(film);
                         }
                 }
-                return matchedDirectors
+                return matchList
+        }
+
+        fun searchFilmByMainActor(search: String): MutableList<Film> {
+                val matchList = mutableListOf<Film>()
+                for (film in films) {
+                        if (search.lowercase() == film.mainActor) {
+                                matchList.add(film);
+                        }
+                }
+                return matchList
+        }
+
+        fun searchFilmByMainGenere(search: String): MutableList<Film> {
+                val matchList = mutableListOf<Film>()
+                for (film in films) {
+                        if (search.lowercase() == film.genere) {
+                                matchList.add(film);
+                        }
+                }
+                return matchList
+        }
+
+        fun searchFilmByDuration(search: Int): MutableList<Film> {
+                val matchList = mutableListOf<Film>()
+                for (film in films) {
+                        if (search == film.duration) {
+                                matchList.add(film);
+                        }
+                }
+                return matchList
+        }
+
+        fun searchFilmByNotWatched(): MutableList<Film>
+        {
+                val matchList = mutableListOf<Film>()
+                for (film in films) {
+                        if(film !in AppState.currentUser.watchedFilms)
+                        {
+                                matchList.add(film);
+                        }
+                }
+                return matchList
+        }
+
+        fun searchFilmByRecomended()
+        {
+
         }
 }

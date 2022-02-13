@@ -36,7 +36,6 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
                     return appState
                 }
             }
-            showFilmMenu()
         }
     }
 
@@ -54,9 +53,6 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
         appState.filmItb.addFilm(title, director,genere,mainActor,resume, ageRating, duration)
     }
 
-    /**
-     *  Print a formatted list of all films
-     */
     private fun displayFilms()
     {
         for(i in appState.filmItb.films.indices){
@@ -110,13 +106,19 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
 
     private fun showFavorites() {
         println("[Show favorites]")
-        appState.filmItb.showFavorites()
+        val favorites = appState.filmItb.showFavorites()
+        for(favorite in favorites)
+        {
+            println("${favorite.title}")
+        }
     }
 
     private fun showLikesFilm() {
-        for(i in appState.filmItb.films.indices){
-            val film = appState.filmItb.films[i]
-            println("$i: ${film.title}  ${film.likes}")
+
+        val likedFilms = appState.filmItb.likesPerFilm()
+        for(liked in likedFilms)
+        {
+            println("${liked.title} ${liked.likes}")
         }
     }
 }

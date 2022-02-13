@@ -33,9 +33,9 @@ class UI {
             println("2: Films")
             println("3: Search")
             println("0: Exit")
-            userUI = UserUI(scan, appState);
-            filmUI = FilmUI(scan, appState);
-            searchUI = SearchUI(scan, appState);
+         // userUI = UserUI(scan, appState);
+           // filmUI = FilmUI(scan, appState);
+           // searchUI = SearchUI(scan, appState);
             when (inputInt(scan)) {
                 1 -> appState = userUI.showUsersMenu();
                 2 -> appState = filmUI.showFilmMenu();
