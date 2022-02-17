@@ -59,20 +59,21 @@ class FilmItb {
                 ageRating: Int,
                 duration: Int
         ) {
-                val newFilm = FilmItb()
-                newFilm.films.add(Film(title, director, genere, mainActor, resume, ageRating, duration))
+                films.add(Film(title, director, genere, mainActor, resume, ageRating, duration, 0))
         }
 
-        fun watchedFilms(film: Film): Film {
+        fun addFilmToWatchedFilms(film: Film): Film {
 
                 AppState.currentUser.watchedFilms.add(film);
                 return film
         }
 
-        fun displayWatchedFilms() {
+        fun displayWatchedFilms(): MutableList<Film> {
+                val list = mutableListOf<Film>()
                 for (i in AppState.currentUser.watchedFilms.indices) {
-                        println("$i: ${AppState.currentUser.watchedFilms[i].title}")
+                        list.add(AppState.currentUser.watchedFilms[i])
                 }
+                return list
         }
 
         fun addFavorites(film: Film): Film {

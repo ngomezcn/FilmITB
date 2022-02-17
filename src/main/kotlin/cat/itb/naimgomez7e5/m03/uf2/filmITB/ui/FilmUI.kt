@@ -89,13 +89,16 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
 
     private fun watchFilms() {
         println("[Watch films]")
-        val film = appState.filmItb.watchedFilms(selectFilmFromMenu("Which movie do you want to watch?"))
+        val film = appState.filmItb.addFilmToWatchedFilms(selectFilmFromMenu("Which movie do you want to watch?"))
         println("The movie has been viewed '${film.title}'")
     }
 
     private fun viewWatchedFilms() {
         println("[Watched films]")
-        appState.filmItb.displayWatchedFilms()
+        val list = appState.filmItb.displayWatchedFilms()
+        for(i in list.indices) {
+            println("$i: ${list[i].title}")
+        }
     }
 
     private fun addFavorites() {
