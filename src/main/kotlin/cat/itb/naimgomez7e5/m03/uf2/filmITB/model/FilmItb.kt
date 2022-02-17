@@ -45,7 +45,6 @@ class FilmItb {
          * Deletes the indicated film from the database
          */
         fun deleteFilm(film: Film) {
-
                 films.removeAt(
                         films.indexOf(film)
                 );
