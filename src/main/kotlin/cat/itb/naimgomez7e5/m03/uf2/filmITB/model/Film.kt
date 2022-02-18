@@ -1,5 +1,15 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.model
 
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.UI
+
+/**
+ * The main model of films *Film*.
+ *
+ * This class has only has the attributes of a film
+ *
+ * @author Mgarcia & Ngomez
+ * @property likes: By default it is instantiated at 0
+ */
 class Film(
     val title: String,
     val director: String,

@@ -15,13 +15,16 @@ class FilmItb {
                 "https://docs.google.com/spreadsheets/d/e/2PACX-1vQBtQVIUV6oTkkqvlWMpWfUTyLanzsYvApKh860-vClyei8_ZM-4yoYeWgGjMj_HEFpd1XoMxx3y0JX/pub?output=csv";
 
         /**
-         * Main func to load data
+         * Main func to load data on each model
          * */
         fun loadData() {
                 loadDataFilm(filmsURL);
                 loadDataUsers(usersURL);
         }
 
+        /**
+         * Load films data
+         */
         private fun loadDataFilm(url: String) {
                 val data = getCSVFromUrl(URL(url))
 
@@ -50,6 +53,9 @@ class FilmItb {
                 );
         }
 
+        /**
+         *  Add a new film by passing one by one attributes
+         */
         fun addFilm(
                 title: String,
                 director: String,
@@ -62,13 +68,19 @@ class FilmItb {
                 films.add(Film(title, director, genere, mainActor, resume, ageRating, duration, 0))
         }
 
+        /**
+         * Add the indicated film to the currenstUser wachtedFilms
+         */
         fun addFilmToWatchedFilms(film: Film): Film {
 
                 AppState.currentUser.watchedFilms.add(film);
                 return film
         }
 
-        fun displayWatchedFilms(): MutableList<Film> {
+        /**
+         * Returns a List<Film> of movies the currentuser has seen
+         */
+        fun displayWatchedFilms(): List<Film> {
                 val list = mutableListOf<Film>()
                 for (i in AppState.currentUser.watchedFilms.indices) {
                         list.add(AppState.currentUser.watchedFilms[i])
@@ -76,6 +88,10 @@ class FilmItb {
                 return list
         }
 
+        /**
+         * Adds the indicated movie to the favorite movies of the currentuser
+         * and increment the likes of the film by one
+         */
         fun addFavorites(film: Film): Film {
                 for(i in AppState.currentUser.likedFilms.indices){
                         if(AppState.currentUser.likedFilms[i].title == film.title){
@@ -86,7 +102,10 @@ class FilmItb {
                 return film
         }
 
-        fun showFavorites(): MutableList<Film> {
+        /**
+         * Return a List<Film> with favorites films of the currentuser
+         */
+        fun showFavorites(): List<Film> {
                 val filmList = mutableListOf<Film>()
                 for (liked in AppState.currentUser.likedFilms) {
                         filmList.add(liked)
@@ -94,12 +113,11 @@ class FilmItb {
                 return filmList;
         }
 
+        /**
+         * Return a List<Film> with the films who currentuser liked
+         */
         fun likesPerFilm(): MutableList<Film> {
-                val filmList = mutableListOf<Film>()
-                for (liked in AppState.currentUser.likedFilms) {
-                        filmList.add(liked)
-                }
-                return filmList;
+                return films;
         }
 
         /**
@@ -177,7 +195,10 @@ class FilmItb {
                 }
         }
 
-        fun searchFilmByTitle(search: String): MutableList<Film> {
+        /**
+         * Return a List<Film> with the films that match with the search
+         */
+        fun searchFilmByTitle(search: String): List<Film> {
 
                 val matchList = mutableListOf<Film>()
                 for (film in films) {
@@ -189,7 +210,10 @@ class FilmItb {
                 return matchList
         }
 
-        fun searchDirectorByDirectorName(search: String): MutableList<Film> {
+        /**
+         * Return a List<Film> with the films that match with the search
+         */
+        fun searchDirectorByDirectorName(search: String): List<Film> {
 
                 val matchList = mutableListOf<Film>()
                 for (film in films) {
@@ -201,6 +225,9 @@ class FilmItb {
                 return matchList
         }
 
+        /**
+         * Return a List<Film> with the films that match with the search
+         */
         fun searchFilmByMainActor(search: String): MutableList<Film> {
                 val matchList = mutableListOf<Film>()
                 for (film in films) {
@@ -212,6 +239,9 @@ class FilmItb {
                 return matchList
         }
 
+        /**
+         * Return a List<Film> with the films that match with the search
+         */
         fun searchFilmByMainGenere(search: String): MutableList<Film> {
                 val matchList = mutableListOf<Film>()
                 for (film in films) {
@@ -223,6 +253,9 @@ class FilmItb {
                 return matchList
         }
 
+        /**
+         * Return a List<Film> with the films that match with the search
+         */
         fun searchFilmByDuration(search: Int): MutableList<Film> {
                 val matchList = mutableListOf<Film>()
                 for (film in films) {
@@ -234,6 +267,9 @@ class FilmItb {
                 return matchList
         }
 
+        /**
+         * Return a List<Film> with the films that match with the search
+         */
         fun searchFilmByNotWatched(): MutableList<Film>
         {
                 val matchList = mutableListOf<Film>()

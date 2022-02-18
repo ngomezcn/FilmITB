@@ -4,10 +4,15 @@ import java.util.*
 import kotlin.system.exitProcess
 
 /**
- *  Coding conventions
- *  https://kotlinlang.org/docs/coding-conventions
+ * The main interface *UI*.
+ *
+ * This class has is the entry point of all program,
+ * manage all the calls to the other classes and functions.
+ *
+ * @author Mgarcia & Ngomez
+ * @see The demo data of is loaded from: https://drive.google.com/drive/folders/1ZlpA5C8LNe2BCB_bIqz1XHsx-nwZm48M?usp=sharing
+ * @sample UI.start()
  */
-
 class UI {
     private var appState = AppState();
 
@@ -17,6 +22,9 @@ class UI {
     private var searchUI = SearchUI(scan, appState);
     private var loginUI = LoginUI(scan, appState);
 
+    /**
+     * Entry point of the all, must by called by main()
+     */
     fun start() {
         println("Loading..... ")
         println("Please wait....")
@@ -26,33 +34,39 @@ class UI {
         showMainMenu();
     }
 
+    /**
+     * Display main menu until and call sub-menu functions until users exit
+     */
     fun showMainMenu()
     {
-            println("Welcome ${AppState.currentUser.name} to FilmsITB")
-            println("1: User")
-            println("2: Films")
-            println("3: Search")
-            println("0: Exit")
-            userUI = UserUI(scan, appState);
-            filmUI = FilmUI(scan, appState);
-            searchUI = SearchUI(scan, appState);
-            when (inputInt(scan)) {
-                1 -> appState = userUI.showUsersMenu();
-                2 -> appState = filmUI.showFilmMenu();
-                3 -> appState = searchUI.showSearchMenu();
-                0 -> return;
-                else -> {
-                    return;
-                }
+        println("Welcome ${AppState.currentUser.name} to FilmsITB")
+        println("1: User")
+        println("2: Films")
+        println("3: Search")
+        println("0: Exit")
+        userUI = UserUI(scan, appState);
+        filmUI = FilmUI(scan, appState);
+        searchUI = SearchUI(scan, appState);
+        when (inputInt(scan)) {
+            1 -> appState = userUI.showUsersMenu();
+            2 -> appState = filmUI.showFilmMenu();
+            3 -> appState = searchUI.showSearchMenu();
+            0 -> return;
+            else -> {
+                return;
             }
-         showMainMenu()
+        }
+        showMainMenu()
     }
+
+    /**
+     * Stops the execution of the program with return 0 by default
+     */
     fun exit(status : Int = 0)
     {
         exitProcess(status);
     }
 }
-// https://drive.google.com/drive/folders/1ZlpA5C8LNe2BCB_bIqz1XHsx-nwZm48M?usp=sharing
 fun main()
 {
     UI().start()

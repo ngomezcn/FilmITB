@@ -3,9 +3,17 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.Film
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.isInValidRange
 import java.util.*
-
+/**
+ * The main model of filmUI *FilmUI*.
+ *
+ * This class contains all functions that read and print film data
+ *
+ * @author Mgarcia & Ngomez
+ */
 class FilmUI(val scan: Scanner, val appState : AppState) {
-
+    /**
+     * Print the films menu
+     */
     fun showFilmMenu() : AppState
     {
 
@@ -39,6 +47,9 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
         }
     }
 
+    /**
+     * Add a new film by picking attributes by terminal
+     */
     private fun addFilm() {
         println("[Add film]")
 
@@ -53,6 +64,9 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
         appState.filmItb.addFilm(title, director,genere,mainActor,resume, ageRating, duration)
     }
 
+    /**
+     * Show all films by terminal
+     */
     private fun displayFilms()
     {
         for(i in appState.filmItb.films.indices){
@@ -61,10 +75,16 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
         }
     }
 
+    /**
+     * Call the function that shows all the films
+     */
     private fun showFilms() {
         displayFilms()
     }
 
+    /**
+     * Returns a Film with the selected film
+     */
     private fun selectFilmFromMenu(msg : String) : Film
     {
         displayFilms()
@@ -79,6 +99,9 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
         }
     }
 
+    /**
+     * Delete the selected film with the selectFilmFromMenu() function
+     */
     private fun deleteFilms() {
         println("[Delete User]")
 
@@ -87,12 +110,18 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
         println("Successfully removed!")
     }
 
+    /**
+     * Adds the film selected with the function selectFilmFromMenu() to the watchedFilms list
+     */
     private fun watchFilms() {
         println("[Watch films]")
         val film = appState.filmItb.addFilmToWatchedFilms(selectFilmFromMenu("Which movie do you want to watch?"))
         println("The movie has been viewed '${film.title}'")
     }
 
+    /**
+     * Displays all films in the watchedFilms list via the terminal
+     */
     private fun viewWatchedFilms() {
         println("[Watched films]")
         val list = appState.filmItb.displayWatchedFilms()
@@ -101,12 +130,18 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
         }
     }
 
+    /**
+     * Adds the selected film to the likedFilms list with the function selectFilmFromMenu()
+     */
     private fun addFavorites() {
         println("[Add favorites]")
         val film = appState.filmItb.addFavorites(selectFilmFromMenu("Which movie do you want to watch?"))
         println("The movie interstellar ${film.title} has been added to favorites")
     }
 
+    /**
+     * Displays by terminal all films in the likedFilms list
+     */
     private fun showFavorites() {
         println("[Show favorites]")
         val favorites = appState.filmItb.showFavorites()
@@ -116,6 +151,9 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
         }
     }
 
+    /**
+     * Displays the number of likes for each film by terminal
+     */
     private fun showLikesFilm() {
 
         val likedFilms = appState.filmItb.likesPerFilm()
