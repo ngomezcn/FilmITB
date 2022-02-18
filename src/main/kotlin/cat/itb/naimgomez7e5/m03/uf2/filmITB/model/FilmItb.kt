@@ -246,8 +246,4 @@ class FilmItb {
                 return matchList
         }
 
-        fun searchFilmByRecomended()
-        {
-
-        }
 }

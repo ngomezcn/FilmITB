@@ -140,7 +140,11 @@ internal class FilmItbTest {
 
     @Test
     fun searchDirectorByDirectorName() {
+        val film = Film("Matrix", "Andrew Garfield", "Sci-Fi", "Brus", "...", 7, 145)
+        appState.filmItb.films.add(film)
 
+        assertEquals(0, appState.filmItb.searchDirectorByDirectorName("Ibai").size)
+        assertEquals(appState.filmItb.films.last(),  appState.filmItb.searchDirectorByDirectorName("Andrew Garfield").last())
     }
 
     @Test
@@ -148,24 +152,28 @@ internal class FilmItbTest {
         val film = Film("Avatar", "Not James Cameron", "Sci-Fi", "Sam Worthington", "...", 7, 145)
         appState.filmItb.films.add(film)
         assertEquals(film,  appState.filmItb.searchFilmByMainActor("Sam Worthington").last())
-        assertEquals(0,  appState.filmItb.searchFilmByMainActor("sama worr").size)
+        assertEquals(0,  appState.filmItb.searchFilmByMainActor("Ibai Llanos").size)
     }
 
     @Test
     fun searchFilmByMainGenere() {
+        val film = Film("Avaastar", "Not Jameasds Cameron", "Sci-Fi", "Sam Wasdorthington", "...", 7, 145)
+        appState.filmItb.films.add(film)
+        assertEquals(film,  appState.filmItb.searchFilmByMainGenere("Sci-Fi").last())
+        assertEquals(0,  appState.filmItb.searchFilmByMainGenere("awd").size)
     }
 
     @Test
     fun searchFilmByDuration() {
+         val film = Film("Avadatar", "Not James Caasdmeron", "Sci-Fi", "Sam Worthington", "...", 7, 777)
+        appState.filmItb.films.add(film)
+        assertEquals(film,  appState.filmItb.searchFilmByDuration(777).last())
+        assertEquals(0,  appState.filmItb.searchFilmByDuration(134234).size)
     }
 
     @Test
     fun searchFilmByNotWatched() {
-
-    }
-
-    @Test
-    fun searchFilmByRecomended() {
-
+        val expected = appState.filmItb.films.size - AppState.currentUser.watchedFilms.size
+        assertEquals(expected,  appState.filmItb.searchFilmByNotWatched().size)
     }
 }
