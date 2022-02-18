@@ -47,7 +47,7 @@ class SearchUI(var scan: Scanner, var appState : AppState) {
     private fun searchByDirector() {
         val director = inputString(scan, "Search:")
 
-        var matchedFilms : List<Film> = appState.filmItb.searchDirectorByDirector(director)
+        var matchedFilms : List<Film> = appState.filmItb.searchDirectorByDirectorName(director)
         if(matchedFilms.isEmpty())
             println("No matches found!")
         else

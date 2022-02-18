@@ -112,7 +112,7 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
         val favorites = appState.filmItb.showFavorites()
         for(favorite in favorites)
         {
-            println("${favorite.title}")
+            println(favorite.title)
         }
     }
 
@@ -121,7 +121,7 @@ class FilmUI(val scan: Scanner, val appState : AppState) {
         val likedFilms = appState.filmItb.likesPerFilm()
         for(liked in likedFilms)
         {
-            println("${liked.title} ${liked.likes}")
+            println("${liked.title} \nLikes:${liked.likes}")
         }
     }
 }

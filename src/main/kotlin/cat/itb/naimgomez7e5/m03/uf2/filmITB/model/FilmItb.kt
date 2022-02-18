@@ -181,18 +181,20 @@ class FilmItb {
 
                 val matchList = mutableListOf<Film>()
                 for (film in films) {
-                        if (search.lowercase() == film.title.lowercase()) {
+                        if(film.title.lowercase().contains(search.lowercase()))
+                        {
                                 matchList.add(film);
                         }
                 }
                 return matchList
         }
 
-        fun searchDirectorByDirector(search: String): MutableList<Film> {
+        fun searchDirectorByDirectorName(search: String): MutableList<Film> {
 
                 val matchList = mutableListOf<Film>()
                 for (film in films) {
-                        if (search.lowercase() == film.director) {
+                        if(film.director.lowercase().contains(search.lowercase()))
+                        {
                                 matchList.add(film);
                         }
                 }
@@ -202,7 +204,8 @@ class FilmItb {
         fun searchFilmByMainActor(search: String): MutableList<Film> {
                 val matchList = mutableListOf<Film>()
                 for (film in films) {
-                        if (search.lowercase() == film.mainActor) {
+                        if(film.mainActor.lowercase().contains(search.lowercase()))
+                        {
                                 matchList.add(film);
                         }
                 }
@@ -212,7 +215,8 @@ class FilmItb {
         fun searchFilmByMainGenere(search: String): MutableList<Film> {
                 val matchList = mutableListOf<Film>()
                 for (film in films) {
-                        if (search.lowercase() == film.genere) {
+                        if(film.genere.lowercase().contains(search.lowercase()))
+                        {
                                 matchList.add(film);
                         }
                 }
@@ -222,7 +226,8 @@ class FilmItb {
         fun searchFilmByDuration(search: Int): MutableList<Film> {
                 val matchList = mutableListOf<Film>()
                 for (film in films) {
-                        if (search == film.duration) {
+                        if(film.duration == search)
+                        {
                                 matchList.add(film);
                         }
                 }

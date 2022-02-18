@@ -55,20 +55,30 @@ internal class FilmItbTest {
 
     @Test
     fun displayWatchedFilms() {
-        val list = appState.filmItb.displayWatchedFilms()
-        assertEquals(list, AppState.currentUser.watchedFilms)
+        val expectedValue = appState.filmItb.displayWatchedFilms()
+        assertEquals(expectedValue, AppState.currentUser.watchedFilms)
     }
 
     @Test
     fun addFavorites() {
+        val expectedFilm = Film("Lorem", "Lorem", "Lorem", "Lorem", "Lorem", 1, 1)
+        appState.filmItb.addFavorites(expectedFilm)
+        assertEquals(expectedFilm, AppState.currentUser.likedFilms.last())
     }
 
     @Test
     fun showFavorites() {
+        val expectedValue = AppState.currentUser.likedFilms
+        assertEquals(expectedValue, appState.filmItb.showFavorites())
+
     }
 
     @Test
     fun likesPerFilm() {
+        val film = appState.filmItb.films.last();
+        AppState.currentUser.likedFilms.add(film)
+        val expectedValue = film;
+        assertEquals(expectedValue, appState.filmItb.likesPerFilm().last())
     }
 
     @Test
@@ -113,19 +123,32 @@ internal class FilmItbTest {
 
     @Test
     fun getUserByName() {
-
+        val user = User("Snow", "Lanister", 84)
+        appState.filmItb.users.add(user)
+        assertEquals(null,  appState.filmItb.getUserByName("Paco"))
+        assertEquals(user,  appState.filmItb.getUserByName("Snow"))
     }
 
     @Test
     fun searchFilmByTitle() {
+        val film = Film("Avatar", "Not James Cameron", "Sci-Fi", "Sam Worthington", "...", 7, 145)
+        appState.filmItb.films.add(film)
+
+        assertEquals(0, appState.filmItb.searchFilmByTitle("Ibai").size)
+        assertEquals(appState.filmItb.films.last(),  appState.filmItb.searchFilmByTitle("Avatar").last())
     }
 
     @Test
-    fun searchDirectorByDirector() {
+    fun searchDirectorByDirectorName() {
+
     }
 
     @Test
     fun searchFilmByMainActor() {
+        val film = Film("Avatar", "Not James Cameron", "Sci-Fi", "Sam Worthington", "...", 7, 145)
+        appState.filmItb.films.add(film)
+        assertEquals(film,  appState.filmItb.searchFilmByMainActor("Sam Worthington").last())
+        assertEquals(0,  appState.filmItb.searchFilmByMainActor("sama worr").size)
     }
 
     @Test
