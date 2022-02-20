@@ -20,6 +20,9 @@ class Film(
     val duration: Int,
     var likes: Int = 0,
 ){
+    /**
+     * Allow load data from csv more easy
+     */
     constructor(sValues: List<String>, iValues: List<Int>) :
             this(
                 title = sValues[0], director = sValues[1], genere = sValues[2], mainActor = sValues[3], resume =  sValues[4],

@@ -2,18 +2,14 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.isCurrentUser
-import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.isInValidRange
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.*
 import java.util.*
 
-/**
- * Author: Garsemar & Ngomez
- * Date: 04/02/2022
- *
- * Console interface to....
- */
 class UserUI(val scan: Scanner, var appState : AppState) {
 
-
+    /**
+     *
+     */
     fun showUsersMenu() : AppState {
 
         while (true) {
@@ -120,6 +116,9 @@ class UserUI(val scan: Scanner, var appState : AppState) {
         }
     }
 
+    /**
+     * Display the all users and return the selected, if selected is not valid will ask again
+     */
     private fun selectUserFromMenu(msg : String, allowCurrentUser : Boolean = true, errorMsg : String = msg) : User
     {
 
@@ -152,6 +151,10 @@ class UserUI(val scan: Scanner, var appState : AppState) {
         appState.filmItb.deleteUser(user)
         println("Successfully removed!")
     }
+
+    /**
+     * Change currentUser to another user
+     */
     private fun changeUser(){
         println("[Change User]")
 
@@ -160,8 +163,11 @@ class UserUI(val scan: Scanner, var appState : AppState) {
 
         println("Done!\n Current user: ${AppState.currentUser.name}")
     }
+
+    /**
+     * Not implemented cause its optional
+     */
     private fun showStats(){
-        println("TODO: showStats()")
-        UI().exit()
+        TODO()
     }
 }

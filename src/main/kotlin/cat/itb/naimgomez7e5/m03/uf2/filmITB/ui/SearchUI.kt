@@ -1,10 +1,14 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 import java.util.*
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.*
 
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.*
 
 class SearchUI(var scan: Scanner, var appState : AppState) {
 
+    /**
+     * Run search menu until exit and call the indicated function
+     */
     fun showSearchMenu() : AppState  {
 
         while (true) {
@@ -34,6 +38,9 @@ class SearchUI(var scan: Scanner, var appState : AppState) {
         }
     }
 
+    /**
+     * Display a search by title menu and call the backend function
+     */
     private fun searchByTitle() {
         val title = inputString(scan, "Search: ")
 
@@ -44,6 +51,9 @@ class SearchUI(var scan: Scanner, var appState : AppState) {
             displayFilmList(matchedFilms)
     }
 
+    /**
+     * Display a search by director name menu and call the backend function
+     */
     private fun searchByDirector() {
         val director = inputString(scan, "Search:")
 
@@ -54,6 +64,9 @@ class SearchUI(var scan: Scanner, var appState : AppState) {
             displayFilmList(matchedFilms)
     }
 
+    /**
+     * Display a search by main actor name menu and call the backend function
+     */
     private fun searchByMainActor() {
         val mainActor = inputString(scan, "Search:")
 
@@ -64,6 +77,9 @@ class SearchUI(var scan: Scanner, var appState : AppState) {
             displayFilmList(matchedFilms)
     }
 
+    /**
+     * Display a search by genere name menu and call the backend function
+     */
     private fun searchByGenere() {
         val genere = inputString(scan, "Search:")
 
@@ -74,6 +90,10 @@ class SearchUI(var scan: Scanner, var appState : AppState) {
             displayFilmList(matchedFilms)
     }
 
+
+    /**
+     * Display a search by duration menu and call the backend function
+     */
     private fun searchByLength() {
         val duration = inputInt(scan, "Search:")
 
@@ -84,15 +104,24 @@ class SearchUI(var scan: Scanner, var appState : AppState) {
             displayFilmList(matchedFilms)
     }
 
+    /**
+     * Display a search by not watched by calling the backend function
+     */
     private fun searchByNotWatched() {
         var matchedFilms : List<Film> = appState.filmItb.searchFilmByNotWatched();
         displayFilmList(matchedFilms)
     }
 
+    /**
+     * Not implemented cause its optional
+     */
     private fun searchByRecommended() {
-
+        TODO()
     }
 
+    /**
+     * Show film menu list
+     */
     private fun displayFilmList(list : List<Film>)
     {
         for (film in list)
@@ -101,6 +130,9 @@ class SearchUI(var scan: Scanner, var appState : AppState) {
         }
     }
 
+    /**
+     * Display the film stats
+     */
     private fun displayFilmStats(film : Film)
     {
         println("Title: ${film.title}")

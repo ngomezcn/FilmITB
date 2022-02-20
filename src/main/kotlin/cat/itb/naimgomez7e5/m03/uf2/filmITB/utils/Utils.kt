@@ -6,7 +6,10 @@ import java.net.URL
 import java.net.URLConnection
 import java.util.*
 
-    fun containsCharInRange(s : String, min : Int, max : Int) : Boolean
+    /**
+     * Check if argument char() is in valid a..b ASCII  range
+     */
+    fun containsCharInASCIIRange(s : String, min : Int, max : Int) : Boolean
     {
         for (char in s.iterator())
         {
@@ -18,6 +21,9 @@ import java.util.*
         return true
     }
 
+    /**
+     *  Check if argument user() is the current logged user
+     */
     fun isCurrentUser(user : User) : Boolean
     {
         if(AppState.currentUser == user)
@@ -28,6 +34,9 @@ import java.util.*
 
     }
 
+    /**
+     * Check if int is in indicated range
+     */
     fun isInValidRange(minRange: Int, maxRange: Int, toCheck: Int) : Boolean
     {
         if(toCheck < minRange)

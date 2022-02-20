@@ -5,6 +5,9 @@ data class User(var name: String, var lastName: String, var age: Int)
     val likedFilms: MutableList<Film> = mutableListOf()
     val watchedFilms: MutableList<Film> = mutableListOf()
 
+    /**
+     * Allow load data from csv more easy
+     */
     constructor(sValues: List<String>, iValues: List<Int>) :
             this(sValues[0], sValues[1], iValues[0])
 }

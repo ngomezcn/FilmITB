@@ -3,13 +3,8 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.Film
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.isInValidRange
 import java.util.*
-/**
- * The main model of filmUI *FilmUI*.
- *
- * This class contains all functions that read and print film data
- *
- * @author Mgarcia & Ngomez
- */
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.*
+
 class FilmUI(val scan: Scanner, val appState : AppState) {
     /**
      * Print the films menu

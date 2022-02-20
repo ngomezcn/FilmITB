@@ -2,11 +2,12 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
 import java.util.*
 import kotlin.system.exitProcess
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.*
 
 /**
  * The main interface *UI*.
  *
- * This class has is the entry point of all program,
+ * This class is the entry point of all program,
  * manage all the calls to the other classes and functions.
  *
  * @author Mgarcia & Ngomez
