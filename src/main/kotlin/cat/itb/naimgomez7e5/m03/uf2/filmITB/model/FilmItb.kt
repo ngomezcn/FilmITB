@@ -121,12 +121,11 @@ class FilmItb {
         }
 
         /**
-         * Creates a new user, all the fields of the User(...) constructor will be passed
+         * Creates a new user and add to list of users
          */
         fun addUser(name: String, lastName: String, age: Int) {
-                users.add(
-                        User(name, lastName, age)
-                )
+                var user = User(name, lastName, age)
+                users.add(user)
         }
 
         /**
@@ -241,11 +240,12 @@ class FilmItb {
 
         /**
          * Return a List<Film> with the films that match with the search
+         * @return a list of films of genre search
          */
-        fun searchFilmByMainGenere(search: String): MutableList<Film> {
+        fun searchFilmByMainGenere(genreToSearch: String): MutableList<Film> {
                 val matchList = mutableListOf<Film>()
                 for (film in films) {
-                        if(film.genere.lowercase().contains(search.lowercase()))
+                        if(film.genere.lowercase().contains(genreToSearch.lowercase()))
                         {
                                 matchList.add(film);
                         }

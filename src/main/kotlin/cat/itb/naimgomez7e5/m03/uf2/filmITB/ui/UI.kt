@@ -40,6 +40,7 @@ class UI {
      */
     fun showMainMenu()
     {
+
         println("Welcome ${AppState.currentUser.name} to FilmsITB")
         println("1: User")
         println("2: Films")
