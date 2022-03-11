@@ -3,6 +3,7 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 import java.util.*
 import kotlin.system.exitProcess
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.*
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.FilmItbStorage
 
 /**
  * The main interface *UI*.
@@ -38,7 +39,7 @@ class UI {
     /**
      * Display main menu until and call sub-menu functions until users exit
      */
-    fun showMainMenu()
+    private fun showMainMenu()
     {
 
         println("Welcome ${AppState.currentUser.name} to FilmsITB")
@@ -49,10 +50,10 @@ class UI {
         userUI = UserUI(scan, appState);
         filmUI = FilmUI(scan, appState);
         searchUI = SearchUI(scan, appState);
-        when (inputInt(scan)) {
-            1 -> appState = userUI.showUsersMenu();
-            2 -> appState = filmUI.showFilmMenu();
-            3 -> appState = searchUI.showSearchMenu();
+        appState = when(inputInt(scan)) {
+            1 -> userUI.showUsersMenu();
+            2 -> filmUI.showFilmMenu();
+            3 -> searchUI.showSearchMenu();
             0 -> return;
             else -> {
                 return;
@@ -71,5 +72,10 @@ class UI {
 }
 fun main()
 {
-    UI().start()
+    //
+    var filmItbStorage = FilmItbStorage()
+    print(filmItbStorage.checkFileExist("films.json"))
+    filmItbStorage.loadUsers()
+    //FilmItbStorage().loadUsers();
+    //UI().start()
 }
