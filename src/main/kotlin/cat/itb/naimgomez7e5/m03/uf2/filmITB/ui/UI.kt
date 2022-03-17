@@ -4,6 +4,7 @@ import java.util.*
 import kotlin.system.exitProcess
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.*
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.FilmItbStorage
+import java.nio.file.Paths
 
 /**
  * The main interface *UI*.
@@ -72,10 +73,6 @@ class UI {
 }
 fun main()
 {
-    //
-    var filmItbStorage = FilmItbStorage()
-    //print(filmItbStorage.checkFileExist("films.json"))
-    //filmItbStorage.loadUsers()
-    //FilmItbStorage().loadUsers();
-    //UI().start()
+
+    UI().start()
 }

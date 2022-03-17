@@ -8,11 +8,9 @@ import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.*
 class FilmItb {
 
     private val filmItbStorage = FilmItbStorage();
-    //val films = filmItbStorage.loadFilms();
-    //val users = filmItbStorage.loadUsers()
+    val films = filmItbStorage.loadFilms();
+    val users = filmItbStorage.loadUsers()
 
-    val films = mutableListOf<Film>()
-    val users = mutableListOf<User>()
 
     /**
      * Main func to load data on each model

@@ -3,57 +3,75 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.model
 import kotlinx.serialization.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import org.json.JSONObject
+import java.io.File
 import java.nio.file.Path
 import kotlin.io.path.Path
+import java.nio.file.Files
 
 import java.nio.file.*;
+import kotlin.io.path.listDirectoryEntries
+import kotlin.io.path.readLines
+import kotlin.io.path.readText
 
 class FilmItbStorage {
-    fun checkFileExist(name: String): Boolean {
+    private val rootPath: Path = Paths.get("").toAbsolutePath()
+    private val folderName: String = "data"
 
-        val path = Path("asdsd/asdasd");
+    private val folderPath =  rootPath.resolve(folderName);
 
-        //val files : List<Path> = path.listirectoryEntries()
-        /*val file = File("../data/$name")
-        if(file.exists()){
-            return true
-        }
-        return false*/
+    fun saveFilms(){
 
-        return true
-    }
-
-    fun saveFilms(filmItb: FilmItb){
+        //if(jsonExists(jsonsPath, "films.json")) {
+        //    println("hola")
+        //}
     }
 
     fun saveUsers(filmItb: FilmItb){
     }
 
     fun loadFilms(): MutableList<Film> {
-        return mutableListOf<Film>();
-    }
+        val films = mutableListOf<Film>();
+        val filmsPath = folderPath.resolve("films.json");
 
-    fun loadUsers(): MutableList<User>{
-        val loadedUsers = mutableListOf<User>()
-         Json.decodeFromString<MutableList<User>>("""
-            {
-              "users": [
-                {
-                  "name": "sara",
-                  "lastName": "lopez",
-                  "age": 13
-                },
-                {
-                  "name": "manolito",
-                  "lastName": "ferrer",
-                  "age": 20
-                }
-              ]
+        if (Files.exists(filmsPath)) {
+            val dataString = filmsPath.readText()
+            val dataJson = JSONObject(dataString);
+            val jsonArray = dataJson.getJSONArray("films");
+
+            for(jsonUser in jsonArray) {
+                val film : Film = Json.decodeFromString<Film>(jsonUser.toString())
+                films.add(film)
             }
-             """.trimIndent())
-        return loadedUsers;
+            return films;
+        } else
+        {
+            println("Failed to load users! There are errors with the path $filmsPath")
+            return films;
+        }
     }
 
+    fun loadUsers(): MutableList<User> {
 
+        val users = mutableListOf<User>();
+        val usersPath = folderPath.resolve("users.json");
 
+        if (Files.exists(usersPath)) {
+            val dataString = usersPath.readText()
+            val dataJson = JSONObject(dataString);
+            val jsonArray = dataJson.getJSONArray("users");
+
+            for(jsonUser in jsonArray) {
+                 val user : User = Json.decodeFromString<User>(jsonUser.toString())
+                 users.add(user);
+            }
+
+            return users;
+        } else
+        {
+            println("Failed to load users! There are errors with the path $usersPath ")
+            return users;
+        }
+    }
 }
