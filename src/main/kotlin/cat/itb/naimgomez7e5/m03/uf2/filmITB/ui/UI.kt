@@ -60,7 +60,7 @@ class UI {
     }
 
     /**
-     * Stops the execution of the program with return 0 by default
+     * Stops the execution of the program and save data
      */
     private fun exit(status : Int = 0): AppState {
         appState.filmItb.saveData();

@@ -86,7 +86,7 @@ class FilmItbStorage {
     }
 
     /**
-     * Overwrite the .json and save the new films data
+     * Overwrite the .json and save the new films
      * @return Boolean
      */
     fun saveFilms(films: List<Film>) : Boolean{
@@ -103,7 +103,7 @@ class FilmItbStorage {
     }
 
     /**
-     * Overwrite the .json and save the new users data
+     * Overwrite the .json and save the new users
      * @return Boolean
      */
     fun saveUsers(users: List<User>): Boolean {
