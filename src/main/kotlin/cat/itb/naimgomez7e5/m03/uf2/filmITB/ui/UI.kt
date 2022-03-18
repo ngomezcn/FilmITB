@@ -1,5 +1,6 @@
 package cat.itb.naimgomez7e5.m03.uf2.filmITB.ui
 
+import cat.itb.naimgomez7e5.m03.uf2.filmITB.model.FilmItb
 import java.util.*
 import kotlin.system.exitProcess
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.*
@@ -29,10 +30,6 @@ class UI {
      * Entry point of the all, must by called by main()
      */
     fun start() {
-        println("Loading..... ")
-        println("Please wait....")
-        appState.filmItb.loadData()
-
         loginUI.showLoginMenu()
         showMainMenu();
     }

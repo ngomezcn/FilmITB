@@ -18,38 +18,25 @@ import kotlin.io.path.readText
 class FilmItbStorage {
     private val rootPath: Path = Paths.get("").toAbsolutePath()
     private val folderName: String = "data"
-
     private val folderPath =  rootPath.resolve(folderName);
-
-    fun saveFilms(){
-
-        //if(jsonExists(jsonsPath, "films.json")) {
-        //    println("hola")
-        //}
-    }
-
-    fun saveUsers(){
-
-    }
 
     fun loadFilms(): MutableList<Film> {
         val films = mutableListOf<Film>();
         val filmsPath = folderPath.resolve("films.json");
 
-        if (Files.exists(filmsPath)) {
+        return if (Files.exists(filmsPath)) {
             val dataString = filmsPath.readText()
-            val dataJson = JSONObject(dataString);
-            val jsonArray = dataJson.getJSONArray("films");
+            val dataJson = JSONObject(dataString)
 
+            val jsonArray = dataJson.getJSONArray("films")
             for(jsonUser in jsonArray) {
                 val film : Film = Json.decodeFromString<Film>(jsonUser.toString())
                 films.add(film)
             }
-            return films;
-        } else
-        {
+            films;
+        } else {
             println("Failed to load users! There are errors with the path $filmsPath")
-            return films;
+            films;
         }
     }
 
@@ -58,7 +45,7 @@ class FilmItbStorage {
         val users = mutableListOf<User>();
         val usersPath = folderPath.resolve("users.json");
 
-        if (Files.exists(usersPath)) {
+        return if (Files.exists(usersPath)) {
             val dataString = usersPath.readText()
             val dataJson = JSONObject(dataString);
             val jsonArray = dataJson.getJSONArray("users");
@@ -68,11 +55,27 @@ class FilmItbStorage {
                  users.add(user);
             }
 
-            return users;
+            users;
         } else
         {
-            println("Failed to load users! There are errors with the path $usersPath ")
-            return users;
+            println("Failed to load users! There are errors with the path $usersPath")
+            users;
         }
+    }
+
+    fun saveFilms() : Boolean{
+        val filmsPath = folderPath.resolve("users.json");
+        return if (Files.exists(filmsPath)) {
+
+
+            true
+        } else {
+            println("Failed to save users! There are errors with the path $filmsPath")
+            false;
+        }
+    }
+
+    fun saveUsers(){
+
     }
 }

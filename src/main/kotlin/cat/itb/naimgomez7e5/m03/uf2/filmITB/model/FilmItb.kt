@@ -3,6 +3,8 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.model
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.ui.AppState
 import java.net.URL
 import cat.itb.naimgomez7e5.m03.uf2.filmITB.utils.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class FilmItb {
 
@@ -11,64 +13,12 @@ class FilmItb {
     val users = filmItbStorage.loadUsers()
 
     /**
-     * Main func to load data on each model
-     * */
-    fun loadData() {
-
-    }
-
-    /**
-     * Load data from remote repo
-     *
-    private fun loadDataUsers(url: String) {
-    val data = getCSVFromUrl(URL(url))
-
-    if (data.hasNextLine()) data.nextLine() // Remove header CSV
-    while (data.hasNextLine()) {
-    val values = data.nextLine().split(",")
-    val sValues = mutableListOf<String>()
-    val iValues = mutableListOf<Int>()
-    for (i in values) {
-    if (i.toIntOrNull() == null) {
-    sValues.add(i);
-    } else {
-    iValues.add(i.toInt())
-    }
-    }
-    println("$sValues $iValues")
-    users.add(User(sValues, iValues));
-    }
-    }
-     */
-    /**
-     * Load films data
-    private fun loadDataFilm(url: String) {
-    val data = getCSVFromUrl(URL(url))
-
-    if (data.hasNextLine()) data.nextLine() // Remove header CSV
-    while (data.hasNextLine()) {
-    val values = data.nextLine().split(",")
-    val sValues = mutableListOf<String>()
-    val iValues = mutableListOf<Int>()
-    for (i in values) {
-    if (i.toIntOrNull() == null) {
-    sValues.add(i);
-    } else {
-    iValues.add(i.toInt())
-    }
-    }
-    films.add(Film(sValues, iValues));
-    }
-    }
-     */
-
-    /**
      * Deletes the indicated film from the database
      */
     fun deleteFilm(film: Film) {
         films.removeAt(
             films.indexOf(film)
-        );
+        )
     }
 
     /**

@@ -1,0 +1,64 @@
+{
+  "films": [
+    {
+      "title": "Avatar",
+      "director": "James Cameron",
+      "genere": "Sci-Fi",
+      "mainActor": "Sam Worthington",
+      "resume": "...",
+      "ageRating": 7,
+      "duration": 145,
+      "likes": 5343
+    },
+    {
+      "title": "The Lord of the Rings",
+      "director": "Peter Jackson",
+      "genere": "Fantasy",
+      "mainActor": "Elijah Wood",
+      "resume": "...",
+      "ageRating": 13,
+      "duration": 222,
+      "likes": 4142
+    },
+    {
+      "title": "Interstellar",
+      "director": "Christopher Nolan",
+      "genere": "Sci-Fi",
+      "mainActor": "Matthew McConaughey",
+      "resume": "...",
+      "ageRating": 169,
+      "duration": 222,
+      "likes": 5134
+    },
+    {
+      "title": "Toy Story 3",
+      "director": "Peter Jackson",
+      "genere": "Fantasy",
+      "mainActor": "Elijah Wood",
+      "resume": "...",
+      "ageRating": 13,
+      "duration": 222,
+      "likes": 2636
+    },
+    {
+      "title": "Shrek",
+      "director": "Carl Peter",
+      "genere": "Fantasy",
+      "mainActor": "Elijah Wood",
+      "resume": "...",
+      "ageRating": 13,
+      "duration": 222,
+      "likes": 71235
+    },
+    {
+      "title": "50 Shades of Grey",
+      "director": "Peter Jackson",
+      "genere": "Fantasy",
+      "mainActor": "Elijah Wood",
+      "resume": "...",
+      "ageRating": 13,
+      "duration": 222,
+      "likes": 91235
+    }
+  ]
+}

@@ -47,3 +47,11 @@ import java.util.*
     }
 
 
+/**
+ * Get data from remote csv using an url
+ * ! Return the CSV as Scanner
+ * */
+fun getCSVFromUrl(url: URL): Scanner {
+    val response: URLConnection = url.openConnection()
+    return Scanner(response.getInputStream())
+}
