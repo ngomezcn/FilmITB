@@ -22,8 +22,8 @@ class FilmItbStorage {
             val dataString = filmsPath.readText()
             val dataJson = Json.parseToJsonElement(dataString)
 
-            for(i in dataJson.jsonArray.indices) {
-                val film : Film = Json.decodeFromString(dataJson.jsonArray[i].toString())
+            for(jsonUser in dataJson.jsonArray) {
+                val film : Film = Json.decodeFromString(jsonUser.toString())
                 films.add(film)
             }
             films;
@@ -42,8 +42,8 @@ class FilmItbStorage {
             val dataString = usersPath.readText()
             val dataJson = Json.parseToJsonElement(dataString)
 
-            for(i in dataJson.jsonArray.indices) {
-                val user : User = Json.decodeFromString<User>(dataJson.jsonArray[i].toString())
+            for(jsonFilm in dataJson.jsonArray) {
+                val user : User = Json.decodeFromString<User>(jsonFilm.toString())
                 users.add(user)
             }
             users;
