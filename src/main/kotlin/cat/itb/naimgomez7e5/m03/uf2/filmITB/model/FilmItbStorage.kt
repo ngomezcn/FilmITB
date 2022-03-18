@@ -3,14 +3,9 @@ package cat.itb.naimgomez7e5.m03.uf2.filmITB.model
 import kotlinx.serialization.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.jsonPrimitive
-import org.json.JSONObject
-import java.io.File
 import java.nio.file.Path
 import java.nio.file.Files
-
 import java.nio.file.*;
 import kotlin.io.path.*
 
