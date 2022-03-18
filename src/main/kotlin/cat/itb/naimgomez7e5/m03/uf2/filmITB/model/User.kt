@@ -4,8 +4,4 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 @Serializable
-data class User(var name: String, var lastName: String, var age: Int)
-{
-    val likedFilms: MutableList<Film> = mutableListOf()
-    val watchedFilms: MutableList<Film> = mutableListOf()
-}
+data class User(var name: String, var lastName: String, var age: Int, var likedFilms: MutableList<Film> = mutableListOf(), var watchedFilms: MutableList<Film> = mutableListOf())

@@ -12,6 +12,11 @@ class FilmItb {
     val films = filmItbStorage.loadFilms();
     val users = filmItbStorage.loadUsers()
 
+    fun saveData() {
+        filmItbStorage.saveUsers(users)
+        filmItbStorage.saveFilms(films)
+    }
+
     /**
      * Deletes the indicated film from the database
      */

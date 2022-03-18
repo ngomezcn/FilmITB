@@ -51,9 +51,9 @@ class UI {
             1 -> userUI.showUsersMenu();
             2 -> filmUI.showFilmMenu();
             3 -> searchUI.showSearchMenu();
-            0 -> return;
+            0 -> exit();
             else -> {
-                return;
+                exit()
             }
         }
         showMainMenu()
@@ -62,8 +62,8 @@ class UI {
     /**
      * Stops the execution of the program with return 0 by default
      */
-    fun exit(status : Int = 0)
-    {
+    private fun exit(status : Int = 0): AppState {
+        appState.filmItb.saveData();
         exitProcess(status);
     }
 }

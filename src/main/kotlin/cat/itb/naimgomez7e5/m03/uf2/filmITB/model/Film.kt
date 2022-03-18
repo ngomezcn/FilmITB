@@ -21,5 +21,4 @@ class Film(
     val ageRating: Int,
     val duration: Int,
     var likes: Int = 0,
-
 )
